@@ -1,3 +1,10 @@
+## Eldoria
+- Rename the player-facing kingdom to Eldoria while retaining the existing save keys and hosting address.
+
+## Continuous river ripples and giant trees
+- Remove straight rectangular water highlights and masonry riverbed texture; use organic sediment beneath continuous animated ripples and soft glints.
+- Add more large mature trees with wider clearance from streets.
+
 ## Mountain castle detail
 - Add full keeps, textured stone foundations and walls, detailed towers and blue roofs, arched windows, balconies and terrace steps to both mountain citadels.
 

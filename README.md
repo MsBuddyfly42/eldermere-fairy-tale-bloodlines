@@ -1,4 +1,4 @@
-# Eldermere — The Fairy-Tale Bloodlines
+# Eldoria — The Fairy-Tale Bloodlines
 
 A playable 3D elven kingdom with connected districts, furnished buildings, the Silverstitch family campaign, recurring adventures, citizen households, a marketplace, gardens, wildlife, weather, and Aurelin’s storytelling treehouse.
 
