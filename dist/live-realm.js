@@ -575,7 +575,21 @@ const farmCrops={
  mint:{name:'Mint',plant:'mint',item:'mint',harvest:'mint',seconds:45,yield:3,kind:'herb',color:'#7cbe92',use:'Fragrant herbs for your satchel'},
  basil:{name:'Basil',plant:'basil',item:'basil',harvest:'basil',seconds:50,yield:3,kind:'herb',color:'#5b9975',use:'Fresh kitchen herbs'},
  moonflowers:{name:'Moonflowers',plant:'moonflowers',item:'moonflowers',harvest:'moonflowers',seconds:65,yield:3,kind:'flower',color:'#dfb6ef',use:'Luminous magical flowers'},
- starblossoms:{name:'Starblossoms',plant:'starblossoms',item:'starblossoms',harvest:'starblossoms',seconds:80,yield:3,kind:'flower',color:'#e8cf76',use:'Golden flowers with a magical glow'}
+ starblossoms:{name:'Starblossoms',plant:'starblossoms',item:'starblossoms',harvest:'starblossoms',seconds:80,yield:3,kind:'flower',color:'#e8cf76',use:'Golden flowers with a magical glow'},
+ tomatoes:{name:'Tomatoes',plant:'tomatoes',item:'tomatoes',harvest:'tomatoes',seconds:65,yield:4,kind:'berry',color:'#df5544',use:'Harvest into your satchel'},
+ potatoes:{name:'Potatoes',plant:'potatoes',item:'potatoes',harvest:'potatoes',seconds:80,yield:4,kind:'tuber',color:'#bc9b72',use:'Harvest into your satchel'},
+ corn:{name:'Corn',plant:'corn',item:'corn',harvest:'corn',seconds:85,yield:3,kind:'corn',color:'#efce65',use:'Harvest into your satchel'},
+ wheat:{name:'Wheat',plant:'wheat',item:'wheat',harvest:'wheat',seconds:70,yield:4,kind:'grain',color:'#dcb86a',use:'Harvest into your satchel'},
+ lettuce:{name:'Lettuce',plant:'lettuce',item:'lettuce',harvest:'lettuce',seconds:45,yield:3,kind:'leaf',color:'#8fbd75',use:'Harvest into your satchel'},
+ onions:{name:'Onions',plant:'onions',item:'onions',harvest:'onions',seconds:60,yield:4,kind:'bulb',color:'#dec499',use:'Harvest into your satchel'},
+ peas:{name:'Peas',plant:'peas',item:'peas',harvest:'peas',seconds:55,yield:4,kind:'pod',color:'#80b869',use:'Harvest into your satchel'},
+ apples:{name:'Apples',plant:'apples',item:'apples',harvest:'apples',seconds:90,yield:4,kind:'sapling',color:'#d95751',use:'Harvest into your satchel'},
+ blueberries:{name:'Blueberries',plant:'blueberries',item:'blueberries',harvest:'blueberries',seconds:70,yield:4,kind:'berry',color:'#6872bf',use:'Harvest into your satchel'},
+ lavender:{name:'Lavender',plant:'lavender',item:'lavender',harvest:'lavender',seconds:60,yield:3,kind:'spike',color:'#ad8acb',use:'Harvest into your satchel'},
+ rosemary:{name:'Rosemary',plant:'rosemary',item:'rosemary',harvest:'rosemary',seconds:55,yield:3,kind:'needle',color:'#799f83',use:'Harvest into your satchel'},
+ sunflowers:{name:'Sunflowers',plant:'sunflowers',item:'sunflowers',harvest:'sunflowers',seconds:80,yield:3,kind:'flower',color:'#efc54c',use:'Harvest into your satchel'},
+ silverberries:{name:'Silverberries',plant:'silverberries',item:'silverberries',harvest:'silverberries',seconds:75,yield:4,kind:'berry',color:'#dbe3ef',use:'Harvest into your satchel'},
+ starlightMushrooms:{name:'Starlight mushrooms',plant:'starlight mushrooms',item:'starlight mushrooms',harvest:'starlight mushrooms',seconds:65,yield:3,kind:'mushroom',color:'#9ecde8',use:'Harvest into your satchel'}
 };
 function farmCrop(f){return farmCrops[f?.crop]||farmCrops.moonleaf;}
 var selectedGardenPlot;
@@ -776,7 +790,13 @@ function cloneWorkProps(source){let metadata=[];source.traverse(n=>{metadata.pus
 
 function useCurrentActivity(){if(physicalActivity){playEasyActivity();return;}if(handsOnWork){playEasyWork();return;}activate(nearest);}
 
-function buildGardenPlant(group,c){if(c.kind==='gourd'){cyl(group,0,.5,0,.035,.045,.6,'#71975c');let fruit=sphere(group,0,.47,0,.34,c.color,1,.8,1);fruit.userData.ripeProduce=true;for(let x of [-.16,.16]){let lobe=sphere(group,x,.47,0,.26,c.color,.6,1,1);lobe.userData.ripeProduce=true;}cyl(group,0,.77,0,.035,.045,.2,'#6e854e');}
+function buildGardenPlant(group,c){let ripe=node=>{node.userData.ripeProduce=true;return node;};
+ if(c.kind==='mushroom'){cyl(group,0,.35,0,.07,.09,.5,'#e2dcc9');let cap=ripe(sphere(group,0,.64,0,.29,c.color,1,.5,1));cap.material=mat(c.color,{emissive:c.color,emissiveIntensity:.35});for(let x of [-.12,.12])ripe(sphere(group,x,.72,.08,.035,'#fff6cd'));}
+ else if(c.kind==='sapling'){cyl(group,0,.62,0,.06,.09,1.2,'#917255');sphere(group,0,1.05,0,.4,'#79a46a');for(let x of [-.25,.25])ripe(sphere(group,x,.98,.25,.13,c.color));}
+ else if(c.kind==='tuber'||c.kind==='bulb'){ripe(sphere(group,0,.24,0,.24,c.color,1,c.kind==='bulb'?1:.6,1));for(let x of [-.1,0,.1])sphere(group,x,.6,0,.09,'#78a663',.5,3,.5);}
+ else if(c.kind==='leaf'){for(let i=0;i<7;i++){let a=i*Math.PI*2/7;let leaf=sphere(group,Math.sin(a)*.14,.32,Math.cos(a)*.14,.25,c.color,1,.65,1);leaf.rotation.z=Math.sin(a)*.5;}}
+ else if(['corn','grain','spike','needle','pod'].includes(c.kind)){cyl(group,0,.68,0,.035,.05,1.15,'#7c9b60');for(let side of [-1,1]){sphere(group,side*.14,.6,0,.15,'#81a969',.6,2,.4);if(c.kind==='corn')ripe(sphere(group,side*.11,.85,.1,.12,c.color,.8,2.6,.8));if(c.kind==='pod')ripe(sphere(group,side*.13,.75,.12,.1,c.color,.65,2.7,.6));}if(c.kind==='grain'||c.kind==='spike')for(let i=0;i<5;i++)for(let side of [-1,1])ripe(sphere(group,side*.065,.87+i*.075,0,.06,c.color,1,1.3,.7));if(c.kind==='needle')for(let i=0;i<6;i++)for(let side of [-1,1])sphere(group,side*.1,.4+i*.1,0,.06,c.color,2,.5,.4);}
+ else if(c.kind==='gourd'){cyl(group,0,.5,0,.035,.045,.6,'#71975c');let fruit=sphere(group,0,.47,0,.34,c.color,1,.8,1);fruit.userData.ripeProduce=true;for(let x of [-.16,.16]){let lobe=sphere(group,x,.47,0,.26,c.color,.6,1,1);lobe.userData.ripeProduce=true;}cyl(group,0,.77,0,.035,.045,.2,'#6e854e');}
  else if(c.kind==='root'){let root=cyl(group,0,.34,0,.14,0,.5,c.color);root.userData.ripeProduce=true;for(let side of [-1,0,1])sphere(group,side*.1,.61,0,.12,'#81ad6b',.5,1.7,.6);}
  else{cyl(group,0,.55,0,.04,.05,.8,'#73995c');for(let side of [-1,1])sphere(group,side*.17,.7,0,.16,c.kind==='herb'?c.color:'#7ba96b',1.6,.45,1);if(c.kind==='berry')for(let side of [-1,1]){let berry=sphere(group,side*.16,.46,.12,.12,c.color,.9,1.2,.9);berry.userData.ripeProduce=true;}if(c.kind==='flower'){for(let i=0;i<5;i++){let petal=sphere(group,Math.sin(i*Math.PI*2/5)*.16,.96,Math.cos(i*Math.PI*2/5)*.16,.14,c.color,1,.45,1);petal.userData.ripeProduce=true;petal.material=mat(c.color,{emissive:c.color,emissiveIntensity:.22});}sphere(group,0,.96,0,.08,'#ffe6a4');}}}
 

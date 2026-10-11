@@ -107,3 +107,6 @@ Living Kingdom: five rotating adventures (repair, hare escort, evidence/choice i
 - Verify all eight crop cycles in both outdoor and conservatory plots.
 
 - Extend immediate single-command acted sequences to all existing physical activity profiles, while keeping game challenges interactive.
+
+### Expanded garden selection
+Added 14 freely available crops, for 22 total, with the same complete one-click acted growing cycle in outdoor and conservatory plots. Added vegetable, grain, sapling, herb and glowing mushroom geometry. All 22 crop cycles are tested in both garden types.
