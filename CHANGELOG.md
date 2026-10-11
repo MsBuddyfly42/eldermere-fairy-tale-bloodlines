@@ -127,3 +127,6 @@ Character names show only within six world units; building labels show within te
 
 ### Mountains, river life and celestial sky
 Cragged multi-ring mountains use elevation-colored rock and snow. River ripples flow and translucent water reveals 176 animated fish representing eight species. Every district has a fishing-permitted sign and an easy acted cast/bite/reel cycle that saves catches to the satchel. Daytime sky is brighter blue with a visible sun and drifting cloud groups; clear nights show a cratered moon and 650 stars. Existing travel and activity controls are retained.
+
+### Fishing access and marketplace detail
+Larger permanent fishing signboards advertise click/E, with broader interaction range and a Go fishing shortcut. Fishing shows rod movement and the caught fish. Market stalls gain striped sloping awnings, valances, timber posts, counter boards, produce trays and barrels. Submerged riverbed stones add depth beneath the swimming fish.
