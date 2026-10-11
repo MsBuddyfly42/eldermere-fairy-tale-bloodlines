@@ -72,3 +72,5 @@ Use **Kitchen & harvest** for twelve crop/fish recipes, market sales and saved f
 The elven visual pass adds leaf carvings, silver accents, woven cloth and timber surfaces, curved bridge rails, styled interiors, articulated woodland animals, windblown grass and foliage, and animated river surfaces. The **Elven graphics** button offers Balanced, High and Light detail without changing adventure progress. Automated scene checks use a renderer stub; GPU appearance and device performance require a browser check.
 
 Roofs now follow the supplied elven cottage reference: layered blue scalloped shingles, sweeping curved roof surfaces and timber edges, warm arched dormers and slender spires. This is an original procedural 3D interpretation of the reference rather than a reproduction of the illustration.
+
+The whole-scene reference pass extends that style to organic timber facades and doorway frames, warm pointed-arch windows, textured masonry and stone paths, flowering borders, meadow blossoms and ferns, gnarled tree trunks and irregular foliage, distant mountain citadels, dawn/dusk skies and carved interior furniture. It retains the existing world layout and gameplay.
