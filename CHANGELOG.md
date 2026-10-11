@@ -99,3 +99,11 @@ Living Kingdom: five rotating adventures (repair, hare escort, evidence/choice i
 - Start garden work immediately from the selected action.
 - Route Use/E directly to active work and accept easy clicks across the bed.
 - Check completion through the real update loop, not only isolated activity ticks.
+
+## Eight crop varieties
+- Add strawberries, carrots, pumpkins, mint, basil, moonflowers and starblossoms alongside moonleaf.
+- All crops support sowing, watering, timed visible growth and harvest in every garden type.
+- Preserve crop identities, prevent early/duplicate harvests, and retain legacy moonleaf saves.
+- Verify all eight crop cycles in both outdoor and conservatory plots.
+
+- Extend immediate single-command acted sequences to all existing physical activity profiles, while keeping game challenges interactive.

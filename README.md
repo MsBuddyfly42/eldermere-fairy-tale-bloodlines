@@ -61,3 +61,7 @@ Physical work also covers shoemaking from the first material choice, furniture p
 Easy controls are now the default: click/tap the highlighted object, press E/Use, or choose the action button. One garden action plays the full digging/planting, watering, or harvesting sequence; baking has single-action stirring and kneading. Precision gestures remain optional under More hands-on controls. Garden beds show four spaced plants, no duplicate crop layer or smaller soil patch, and a basket beside the bed.
 
 Selecting Plant moonleaf, Water the seedlings, or Harvest two moonleaf sprigs immediately begins the visible sequence. Use/E targets the active work directly and does not depend on the nearby-object selection.
+
+The garden now offers eight crops in every outdoor and conservatory plot: moonleaf, strawberries, carrots, pumpkins, mint, basil, moonflowers and starblossoms. All use the complete sow → water → timed growth → harvest cycle with one-click animated actions, four spaced plants and crop-specific geometry. Each crop has its own growth time (45–90 seconds) and harvest quantity, deposited in the satchel. Existing moonleaf saves and timers continue unchanged.
+
+Activity commands now immediately start their full visible sequence, including crafting, equipment, decorations, feeding, gifts, trades, evidence handling and home deliveries/rewards. Easy controls do not require a second confirmation or repeated gesture steps. Archery and lantern-catching retain player input for their game challenges.
