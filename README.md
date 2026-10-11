@@ -43,3 +43,7 @@ Tests check gameplay logic and scene construction using a renderer stub; they do
 Alternatively, create a Render Blueprint using the included render.yaml. No environment variables, database, paid server, or install step is required.
 
 The original story manuscript and adapted chapters are included in dist/stories. CHANGELOG.md records the game’s features and limitations. Vendored Three.js carries its MIT license in dist/vendor/LICENSE.
+
+## Cottage adventure headquarters
+
+Go home opens your cottage adventure board. Choose investigations, recurring errands, community jobs, family heirlooms, guild work, academy activities, gardening, festival games, or storytelling visits. Existing quest progress remains intact. Adventure coin rewards are recorded in your browser save and collected only at the cottage board; kingdom parcels are turned in there too. Shop sales still pay at the marketplace. Story scenes, evidence, and relationships continue at their original locations.
