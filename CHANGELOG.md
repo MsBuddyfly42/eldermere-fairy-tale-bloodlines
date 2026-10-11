@@ -1,3 +1,8 @@
+## Connected matching paths
+- New approaches join the nearest reachable existing paving or road, sharing branches instead of adding separate parallel approaches.
+- Recognize the actual roads between districts, keeping junction borders open.
+- All stone paving shares color, world-scaled texture and surface height; the owl treehouse retains its natural woodland approach.
+
 # Eldermere — The Fairy-Tale Bloodlines
 A browser-based 3D fantasy game for Templar. Static hosting serves `dist/`; no build or external runtime CDN is needed. Three.js 0.180.0 is vendored with its MIT license.
 
@@ -152,3 +157,7 @@ Smoother sphere geometry, textured cloth and wood, leaf-carved architectural det
 - Extended the supplied image’s art direction beyond roofs: curved timber-and-stone facades, pointed-arch windows and lanterns, textured masonry paths, flowering borders, ferns and meadows, gnarled trees, cragged mountains with distant citadels, warm dawn/dusk skies, matching interiors and sculpted furniture.
 
 - Connected stone approaches to static outdoor entrances and activities, both ends of all bridges, residents’ halls, treehouse stairs, market counters, gardens and fishing signs. Adds a connector for an off-path saved arrival, and clears instanced trees, flowers and grass from new paths.
+
+- Unified old sidewalks, roads and new paths with one world-scaled stone pattern and the same warm stone color, timber-brown edging and pale gold trim. Aligned road/approach surface heights and removed internal borders at joins.
+
+- Leaves Aurelin’s treehouse and Memorybough in natural woodland with their existing stairs, without paved approaches.
