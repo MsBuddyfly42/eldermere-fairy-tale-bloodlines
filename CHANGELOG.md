@@ -113,3 +113,8 @@ Added 14 freely available crops, for 22 total, with the same complete one-click 
 
 ### Clearer kingdom and detailed cottages
 Replaced dense exponential haze with distant linear fog: clear daytime stays unobscured for 140 world units; interiors have no fog. Weather retains gentle distant atmosphere. Cottage exteriors now have pitched tiled gable roofs, stone-textured plaster, masonry plinths, timber framing, shutter slats, layered windows and doors, attic windows and sheltered entrances, within existing walking clearances.
+
+### Kingdom-wide architectural appearance
+Extended masonry texture, corner stones, cornices, layered windows and doorway surrounds to palaces, towers and ruins. Palace towers gain masonry bands and parapets; ruins gain boarded windows and facade ivy. Roads retain stone paving; sidewalks, terrain and bridge decks gain surface texture and plank details. Geometry remains within existing entrances and collision clearances; gameplay, commands, saves and controls are unchanged.
+
+Nature appearance: deterministic mottled grass texture, rounded broadleaf canopies with visible branches, smoother evergreen silhouettes, gradient day/night/weather skies and translucent distant cloud groups. Outdoor sky is hidden indoors. Existing tree positions, path exclusions, collisions and weather behavior are retained.
