@@ -1,3 +1,7 @@
+## Mobile graphics recovery
+- Cap phone rendering resolution and shadow size, reduce foliage geometry and distant forest layers on phones while retaining giant trees.
+- Show a reload control if WebGL context is lost, without changing saved adventure data.
+
 ## Scenery surface stability
 - Separate new paving from overlapping road/entrance surfaces, soften cutout leaf edges, and prevent translucent water layers from writing conflicting depth.
 
