@@ -1,3 +1,7 @@
+## Encircling wilderness
+- Surround the kingdom on all four sides with cragged mountains, rolling foothills and three layers of varied woodland.
+- Keep scenery outside the playable districts and retain controls, travel and saved progress.
+
 ## Connected matching paths
 - New approaches join the nearest reachable existing paving or road, sharing branches instead of adding separate parallel approaches.
 - Recognize the actual roads between districts, keeping junction borders open.
