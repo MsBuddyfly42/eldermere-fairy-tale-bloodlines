@@ -121,3 +121,6 @@ Nature appearance: deterministic mottled grass texture, rounded broadleaf canopi
 
 ### Remove obsolete roofs
 Removed the original four-sided cone roof meshes and their stripe overlays entirely. Cottages retain their new tiled gables; all other main buildings now use replacement pitched roof groups with tile courses and gable walls. Entrances, collisions and controls are unchanged.
+
+### Labels on approach
+Character names show only within six world units; building labels show within ten units of their entrance. Labels hide in whole-world view and follow moving characters. Dialogue, click targets, entrances and controls are preserved.
