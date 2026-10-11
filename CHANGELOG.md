@@ -118,3 +118,6 @@ Replaced dense exponential haze with distant linear fog: clear daytime stays uno
 Extended masonry texture, corner stones, cornices, layered windows and doorway surrounds to palaces, towers and ruins. Palace towers gain masonry bands and parapets; ruins gain boarded windows and facade ivy. Roads retain stone paving; sidewalks, terrain and bridge decks gain surface texture and plank details. Geometry remains within existing entrances and collision clearances; gameplay, commands, saves and controls are unchanged.
 
 Nature appearance: deterministic mottled grass texture, rounded broadleaf canopies with visible branches, smoother evergreen silhouettes, gradient day/night/weather skies and translucent distant cloud groups. Outdoor sky is hidden indoors. Existing tree positions, path exclusions, collisions and weather behavior are retained.
+
+### Remove obsolete roofs
+Removed the original four-sided cone roof meshes and their stripe overlays entirely. Cottages retain their new tiled gables; all other main buildings now use replacement pitched roof groups with tile courses and gable walls. Entrances, collisions and controls are unchanged.
