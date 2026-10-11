@@ -1,3 +1,7 @@
+## Mountain-fed waterfall
+- Relocate Whispering Cascade into the western mountain foothills between two flanking slopes.
+- Add a continuous animated outlet channel joining the river at its western edge, with streambed and grassy banks. Update Visit waterfall to the new bank.
+
 ## Natural woodland and clear ground
 - Extend all twenty-two building entrance walks to the street center, leaving junctions open.
 - Replace rounded foliage balls throughout the kingdom with textured individual leaf clusters.
