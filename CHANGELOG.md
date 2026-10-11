@@ -88,3 +88,9 @@ Living Kingdom: five rotating adventures (repair, hare escort, evidence/choice i
 - Added direct gardening at outdoor beds and six conservatory plots, with held tools, seed placement, wet soil, visible pouring and crop growth.
 - Extended physical controls to equipment, decorations, dispatch/rewards, clue handling, wishes and the full shoemaking bench.
 - Added gesture and cancellation checks for both garden types, growth gates, harvest inventory, and activity coverage.
+
+## Easier activity controls and tidy plots
+- Default to click/tap/E/Use actions; keep precision gestures optional.
+- One garden action performs the visible sequence; simplify stirring and kneading.
+- Remove the nested soil patch and duplicate crops; space four plants and move the basket beside the bed.
+- Verify easy completion, cancellation, duplicate-click safety and crop geometry ownership.
