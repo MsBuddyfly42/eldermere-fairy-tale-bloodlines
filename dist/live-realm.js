@@ -168,13 +168,13 @@ let footstepTime=0,lightingTime=0;function update(ts){let dt=Math.min((ts-lastFr
 if(!room){updateDistrict();sun.position.set(p.x-20,35,p.z+15);sun.target.position.set(p.x,0,p.z);sun.target.updateMatrixWorld();}
 tickImmersion(dt,moving);animatePerson(player,elapsed,moving);animateHandsOnWork(dt);tickPhysicalActivity(dt);if(!room)player.group.position.y=bridgeHeight(p.x,p.z)+(moving?Math.abs(Math.sin(elapsed*9))*.035:0);npcs.forEach((n,i)=>animateResident(n,i,dt));tickWitness(dt);
 let min=Infinity;nearest=null;objects.forEach(o=>{if(physicalActivity&&!physicalActivity.interactions.includes(o))return;let d=Math.hypot(p.x-o.x,p.z-o.z);if(o.node?.visible!==false&&d<o.radius&&d<min){min=d;nearest=o}});$('nearby').hidden=!nearest;if(nearest)$('nearbyText').textContent=nearest.name;
-let dist=room?zoom:zoom;let desired=new THREE.Vector3(p.x+Math.sin(yaw)*dist*Math.cos(pitch),p.y+dist*Math.sin(pitch)+3,p.z+Math.cos(yaw)*dist*Math.cos(pitch));if(!room&&!overview&&!firstPerson){for(let b of colliders){let crossed=false;for(let t=.15;t<=1;t+=.1){if(Math.abs(p.x+(desired.x-p.x)*t-b.x)<b.w+.7&&Math.abs(p.z+(desired.z-p.z)*t-b.z)<b.d+.7){crossed=true;break;}}if(crossed)desired.y=Math.max(desired.y,24);}}if((physicalActivity||handsOnWork)&&!overview){let work=physicalActivity||handsOnWork;let center=work.profile==='fishing'?work.riverTarget.clone().add(new THREE.Vector3(0,.8,-1.5)):work.group.position.clone().add(new THREE.Vector3(0,1,0));camera.position.lerp(center.clone().add(work.profile==='fishing'?new THREE.Vector3(4,4,-7):new THREE.Vector3(3,2.7,4)),1-Math.exp(-dt*5));camera.lookAt(center);}else if(overview&&!room){player.group.visible=true;camera.position.lerp(overviewCameraTarget(),1-Math.exp(-dt*3));camera.lookAt(0,0,-48);scene3.fog=null;}else if(firstPerson){player.group.visible=false;camera.position.lerp(new THREE.Vector3(p.x,p.y+2.25+(moving?Math.sin(elapsed*9)*.035:0),p.z),1-Math.exp(-dt*12));camera.lookAt(camera.position.x-Math.sin(yaw)*Math.cos(.53-pitch)*10,camera.position.y+Math.sin(.53-pitch)*10,camera.position.z-Math.cos(yaw)*Math.cos(.53-pitch)*10);}else{player.group.visible=true;camera.position.lerp(desired,1-Math.exp(-dt*3.5));camera.lookAt(p.x,p.y+1.5,p.z-1);}
+let dist=room?zoom:zoom;let desired=new THREE.Vector3(p.x+Math.sin(yaw)*dist*Math.cos(pitch),p.y+dist*Math.sin(pitch)+3,p.z+Math.cos(yaw)*dist*Math.cos(pitch));if(!room&&!overview&&!firstPerson){for(let b of colliders){let crossed=false;for(let t=.15;t<=1;t+=.1){if(Math.abs(p.x+(desired.x-p.x)*t-b.x)<b.w+.7&&Math.abs(p.z+(desired.z-p.z)*t-b.z)<b.d+.7){crossed=true;break;}}if(crossed)desired.y=Math.max(desired.y,24);}}if(room&&photographicRoomTexture&&!storyScene){lockPhotographicCamera();}else if((physicalActivity||handsOnWork)&&!overview){let work=physicalActivity||handsOnWork;let center=work.profile==='fishing'?work.riverTarget.clone().add(new THREE.Vector3(0,.8,-1.5)):work.group.position.clone().add(new THREE.Vector3(0,1,0));camera.position.lerp(center.clone().add(work.profile==='fishing'?new THREE.Vector3(4,4,-7):new THREE.Vector3(3,2.7,4)),1-Math.exp(-dt*5));camera.lookAt(center);}else if(overview&&!room){player.group.visible=true;camera.position.lerp(overviewCameraTarget(),1-Math.exp(-dt*3));camera.lookAt(0,0,-48);scene3.fog=null;}else if(firstPerson){player.group.visible=false;camera.position.lerp(new THREE.Vector3(p.x,p.y+2.25+(moving?Math.sin(elapsed*9)*.035:0),p.z),1-Math.exp(-dt*12));camera.lookAt(camera.position.x-Math.sin(yaw)*Math.cos(.53-pitch)*10,camera.position.y+Math.sin(.53-pitch)*10,camera.position.z-Math.cos(yaw)*Math.cos(.53-pitch)*10);}else{player.group.visible=true;camera.position.lerp(desired,1-Math.exp(-dt*3.5));camera.lookAt(p.x,p.y+1.5,p.z-1);}
 if(!$('modal').open)advanceRealmTime(dt*.55);$('clock').textContent='Day '+(state.day||1)+' · '+hour();if(elapsed-lightingTime>5){lightingTime=elapsed;setLighting();updateLocation();let savePos=room?returnPosition:player.group.position;if(savePos)state.worldPosition={x:savePos.x,z:savePos.z};persist();}
 waters.forEach((m,i)=>{if(m.userData.flowBase!==undefined)m.position.x=m.userData.flowBase+((elapsed*.7+i*.2)%1.6)-.8;m.material.opacity=m.userData.waterSurface?.48+Math.sin(elapsed+i)*.05:.7+Math.sin(elapsed+i)*.12});if(particles){let a=particles.geometry.attributes.position.array;for(let i=0;i<a.length;i+=3){a[i]+=Math.sin(elapsed*.4+i)*dt*.035;if(weather!=='clear'&&!room){a[i+1]-=dt*(weather==='snow'?1.6:weather==='sleet'?7:9);a[i]+=dt*(weather==='snow'?Math.sin(elapsed+i)*.6:.4);if(a[i+1]<0)a[i+1]=15}else a[i+1]+=Math.sin(elapsed+i)*dt*.04}particles.geometry.attributes.position.needsUpdate=true;particles.material.color.set(weather!=='clear'&&!room?(weather==='rain'?'#a9d5ed':'#f1f6ff'):'#f6e7a8');particles.material.size=!room&&weather==='snow'?.26:!room&&weather==='sleet'?.15:weather==='rain'?.11:.09; if(!room&&weather!=='clear'){let positions=particles.geometry.attributes.position.array;for(let i=0;i<positions.length;i+=3){if(Math.abs(positions[i]-p.x)>42)positions[i]=p.x+(Math.random()-.5)*70;if(Math.abs(positions[i+2]-p.z)>42)positions[i+2]=p.z+(Math.random()-.5)*70;}}}
 root.children.forEach(g=>{if(g.userData.gardenTime){let growth=Math.min(1,(Date.now()-g.userData.gardenTime)/60000);g.scale.y=.3+growth*1.7;}if(g.userData.rise){g.position.y+=dt*.8;if(g.position.y>18)root.remove(g)}});
 if(sound&&audio){if(Math.floor(elapsed/4)!==footstepTime){footstepTime=Math.floor(elapsed/4);let o=audio.createOscillator(),v=audio.createGain();o.type='sine';o.frequency.value=[261.6,329.6,392,523.2,440,392][footstepTime%6];v.gain.setValueAtTime(0,audio.currentTime);v.gain.linearRampToValueAtTime(.025,audio.currentTime+.6);v.gain.exponentialRampToValueAtTime(.001,audio.currentTime+3.5);o.connect(v);v.connect(audio.destination);o.start();o.stop(audio.currentTime+3.5)}}
 let w=canvas.clientWidth,h=canvas.clientHeight;if(canvas.width!==Math.floor(w*renderer.getPixelRatio())||canvas.height!==Math.floor(h*renderer.getPixelRatio())){renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
-updateProximityLabels();$('zoomSlider').value=zoom;if(navigationTrail){navigationTrail.visible=route.length>0&&!room;}drawLiveMaps();updateWaypoint();renderer.render(scene3,camera);requestAnimationFrame(update)}
+updateProximityLabels();$('zoomSlider').value=zoom;if(navigationTrail){navigationTrail.visible=route.length>0&&!room;}drawLiveMaps();updateWaypoint();if(room&&photographicRoomTexture&&!storyScene)lockPhotographicCamera();renderer.render(scene3,camera);requestAnimationFrame(update)}
 const districtPositions={capital:[0,0],workshop:[-100,0],market:[100,0],home:[100,100],academy:[-100,-100],forest:[0,-100],forgotten:[100,-100],festival:[-100,100],court:[0,-200],gardens:[0,100],library:[-100,-200]};
 const shortNames={capital:'Lantern Capital',workshop:'Shoemaker’s Quarter',market:'Great Elf Market',home:'Willowwood Homes',academy:'Moonlight Academy',forest:'Whispering Woods',forgotten:'Forgotten Quarter',festival:'Lantern Festival',court:'Royal Court',gardens:'Living Gardens',library:'Family Library'};
 function hitInteraction(hit){let ancestor=hit?.object;while(ancestor){if(!ancestor.visible)return null;ancestor=ancestor.parent;}return hit?.object.userData.instanceInteractions?.[hit.instanceId]||hit?.object.userData.interaction;}
@@ -1156,10 +1156,123 @@ function releaseRoomPhotograph(){photographicRoomRequest++;if(photographicRoomTe
 function applyRoomPhotograph(texture,kind){if(roomKind!==kind)return;photographicRoomTexture=texture;scene3.background=texture;scene3.backgroundBlurriness=0;skyDome.visible=false;skyClouds.visible=false;
  const protectedNodes=new Set();for(let o of objects){let n=o.node;while(n&&n!==root){protectedNodes.add(n);n=n.parent;}}
  for(let n of npcs){let node=n.group;while(node&&node!==root){protectedNodes.add(node);node=node.parent;}}
- for(let n of root.children){if(n.userData.referenceFurniture||protectedNodes.has(n))continue;n.visible=false;}
+ for(let n of root.children){if(protectedNodes.has(n))continue;n.visible=false;}
  root.userData.photographicBackdrop=photographicRoomAssets[kind]||'cottage';
 }
 function loadRoomPhotograph(kind){releaseRoomPhotograph();let request=photographicRoomRequest,img=document.createElement('img');img.onload=()=>{if(request!==photographicRoomRequest||roomKind!==kind)return;let texture=new THREE.Texture(img);texture.colorSpace=THREE.SRGBColorSpace;texture.minFilter=THREE.LinearFilter;texture.generateMipmaps=false;texture.needsUpdate=true;applyRoomPhotograph(texture,kind);};img.onerror=()=>{if(request===photographicRoomRequest)console.warn('Room photograph unavailable; keeping 3D interior.',kind);};img.src='./assets/interiors/'+(photographicRoomAssets[kind]||'cottage')+'.jpg';}
 const photographicLoadRoomBefore=loadRoom;loadRoom=function(kind,name){photographicLoadRoomBefore(kind,name);loadRoomPhotograph(kind);};
 const photographicLoadOutdoorBefore=loadOutdoor;loadOutdoor=function(...args){releaseRoomPhotograph();photographicLoadOutdoorBefore(...args);};
 const photographicLightingBefore=setLighting;setLighting=function(...args){photographicLightingBefore(...args);if(room&&photographicRoomTexture)scene3.background=photographicRoomTexture;};
+
+
+// Stage interactive work inside the retained photographic rooms.
+// Coordinates are normalized image positions; each photograph has its own work areas.
+const photographicWorkAreas={
+ cottage:[[.24,.69],[.78,.64],[.39,.62],[.72,.78]],
+ manor:[[.75,.65],[.42,.61],[.23,.73],[.71,.78]],
+ royal:[[.5,.61],[.24,.68],[.77,.68],[.5,.78]],
+ tavern:[[.75,.63],[.24,.68],[.38,.77],[.76,.78]],
+ workshop:[[.22,.66],[.78,.63],[.30,.78],[.73,.78]],
+ library:[[.23,.65],[.77,.66],[.48,.62],[.70,.78]],
+ apothecary:[[.23,.66],[.77,.63],[.36,.76],[.70,.78]],
+ runes:[[.5,.62],[.22,.67],[.77,.67],[.70,.78]],
+ dormitory:[[.5,.62],[.23,.68],[.77,.68],[.70,.78]],
+ stable:[[.76,.65],[.24,.67],[.50,.62],[.72,.78]],
+ shop:[[.76,.63],[.22,.66],[.35,.77],[.72,.78]],
+ study:[[.5,.62],[.23,.69],[.77,.68],[.70,.78]],
+ cellar:[[.5,.62],[.77,.66],[.24,.68],[.70,.78]],
+ greenhouse:[[.23,.67],[.76,.65],[.34,.77],[.70,.78]],
+ sanctuary:[[.23,.68],[.76,.66],[.38,.77],[.70,.78]],
+ treehouse:[[.24,.67],[.75,.65],[.42,.63],[.70,.78]],
+ moonwell:[[.5,.63],[.23,.69],[.77,.67],[.70,.78]],
+ festival:[[.75,.65],[.24,.67],[.5,.62],[.70,.78]]
+};
+let photographicStation=null,photographicStationRoot=null;
+function lockPhotographicCamera(){
+ firstPerson=false;overview=false;player.group.visible=true;
+ // A photograph has one viewpoint: orbiting would detach the actors from its furniture.
+ camera.aspect=16/9;camera.position.set(0,5.8,19);camera.lookAt(0,.8,-3);
+ camera.updateProjectionMatrix();camera.updateMatrixWorld(true);
+}
+function photographFloorPoint(u,v){
+ lockPhotographicCamera();let ray=new THREE.Raycaster();
+ ray.setFromCamera(new THREE.Vector2(u*2-1,1-v*2),camera);
+ let p=ray.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0,1,0),0),new THREE.Vector3());
+ if(!p)return new THREE.Vector3(0,0,4);
+ p.x=Math.max(-9,Math.min(9,p.x));p.z=Math.max(-8,Math.min(8,p.z));return p;
+}
+function placePhotographicActivities(kind){
+ photographicStation=null;photographicStationRoot=root;
+ const areas=photographicWorkAreas[photographicRoomAssets[kind]||'cottage'];
+ lockPhotographicCamera();let moved=new Map(),index=0;
+ // Hidden modeled walls/furniture must not obstruct the floor visible in the photograph.
+ colliders=[];
+ for(let o of objects){
+  if(o.type==='exit'){o.x=0;o.z=9.4;if(o.node?.isMesh){o.node.material=o.node.material.clone();o.node.material.colorWrite=false;o.node.material.depthWrite=false;o.node.castShadow=false;}continue;}
+  if(!o.node)continue;
+  let spot=moved.get(o.node);
+  if(!spot){let a=areas[index%areas.length],row=Math.floor(index/areas.length);
+   spot=photographFloorPoint(a[0]+(row%2?.035:-.035),Math.min(.87,a[1]+row*.045));
+   moved.set(o.node,spot);index++;
+   o.node.position.x=spot.x;o.node.position.z=spot.z-.9;
+   o.node.visible=true;
+   // The image supplies the large furniture; retain clickable tools and characters.
+   if(o.type!=='npc'){
+    o.node.userData.photographicStation=true;
+    o.node.traverse(n=>{if(n!==o.node&&(n.isMesh||n.isSprite))n.visible=false;});
+    let marker=new THREE.Group();marker.position.set(spot.x,0,spot.z-.9);root.add(marker);
+    let ring=new THREE.Mesh(new THREE.TorusGeometry(.25,.025,8,24),mat('#efd8a2',{emissive:'#ae8c42',emissiveIntensity:.4}));
+    ring.rotation.x=Math.PI/2;ring.position.y=.04;ring.userData.interaction=o;marker.add(ring);
+    let title=label(marker,o.name,0,1.7,0,1.2);title.userData.interaction=o;
+    title.userData.proximityLabel=true;marker.userData.photographicActivityMarker=true;
+   }
+  }
+  o.x=spot.x;o.z=spot.z;o.radius=2.2;
+  if(!o.photographicAction){const original=o.action;o.action=()=>{
+   photographicStation={root,kind,object:o,x:o.x,z:o.z};
+   if(!sleeping&&!seated)player.group.rotation.y=Math.PI;
+   original();
+   if(seated)player.group.position.set(o.node.position.x,-.06,o.node.position.z);
+   if(sleeping)player.group.position.set(o.node.position.x,1.45,o.node.position.z);
+  };o.photographicAction=true;}
+ }
+ for(let n of npcs){let spot=moved.get(n.group);if(spot){n.origin.copy(n.group.position);n.dayRoute=[];}}
+ player.group.position.set(0,0,8);route=[];queued=null;
+ $('hint').textContent='Click a room activity to walk over and work there · WASD or touch arrows to move · Leave building to go outside';
+ root.userData.photographicActivities=objects.filter(o=>o.type!=='exit').length;
+}
+const stagedPhotographBefore=applyRoomPhotograph;
+applyRoomPhotograph=function(texture,kind){stagedPhotographBefore(texture,kind);if(roomKind===kind)placePhotographicActivities(kind);};
+function indoorWorkStation(profile){
+ if(!room||!photographicRoomTexture)return null;
+ if(photographicStation?.root===root&&photographicStation.kind===roomKind)return photographicStation;
+ let terms=profile==='bread'||profile==='meal'?/cook|supper|meal|tea/i:profile==='potion'?/brew|draught/i:profile==='boot'?/boots|workbench/i:/work|desk|table|board|register|garden/i;
+ let o=objects.find(o=>o.type!=='exit'&&o.type!=='npc'&&terms.test(o.name));
+ if(!o)o=objects.find(o=>o.type!=='exit'&&o.type!=='npc');
+ return o?{root,kind:roomKind,object:o,x:o.x,z:o.z}:null;
+}
+function stageWorkAtStation(work,station){
+ if(!work||!station||station.root!==root)return;
+ work.group.position.set(station.x,0,station.z-.9);
+ player.group.position.set(station.x,0,station.z+.7);player.group.rotation.y=Math.PI;
+ work.station=station;
+ for(let o of work.interactions||[]){o.x=station.x;o.z=station.z+.7;}
+ lockPhotographicCamera();
+}
+const stationaryHandsBefore=startHandsOnWork;
+startHandsOnWork=function(type,...args){let station=indoorWorkStation(type);stationaryHandsBefore(type,...args);if(handsOnWork?.type===type)stageWorkAtStation(handsOnWork,station);};
+const stationaryPhysicalBefore=startPhysicalActivity;
+startPhysicalActivity=function(profile,...args){let station=indoorWorkStation(profile),before=physicalActivity;stationaryPhysicalBefore(profile,...args);if(physicalActivity&&physicalActivity!==before)stageWorkAtStation(physicalActivity,station);};
+const stagedBedBefore=startBedRest;
+startBedRest=function(){let station=indoorWorkStation('bed');stagedBedBefore();if(sleeping&&station){player.group.position.set(station.x,1.45,station.z-.9);}};
+const stagedWakeBefore=wakeFromBed;
+wakeFromBed=function(...args){let station=photographicStation?.root===root?photographicStation:null;stagedWakeBefore(...args);if(station)player.group.position.set(station.x,0,station.z+.7);};
+const photographicOutdoorCleanupBefore=loadOutdoor;
+loadOutdoor=function(...args){photographicStation=null;photographicStationRoot=null;camera.aspect=canvas.clientWidth/canvas.clientHeight;camera.updateProjectionMatrix();photographicOutdoorCleanupBefore(...args);};
+
+const photographicStandBefore=standUp;
+standUp=function(){let was=seated,station=photographicStation?.root===root?photographicStation:null;photographicStandBefore();if(was&&station)player.group.position.set(station.x,0,station.z);};
+const roomActivitiesButton=document.createElement('button');roomActivitiesButton.textContent='Room activities';roomActivitiesButton.hidden=true;$('realmFooter').append(roomActivitiesButton);
+roomActivitiesButton.onclick=()=>{if(!room||handsOnWork||physicalActivity||storyScene)return;modal(room+' · activities','<p>Choose a station. Walk over, then use its tools and activities.</p>');for(let o of objects.filter(o=>o.type!=='exit')){let b=document.createElement('button');b.textContent=o.name;b.onclick=()=>{$('modal').close();walkTo(o.x,o.z,o);};$('modal').append(b);}};
+const directoryRoomBefore=loadRoom;loadRoom=function(...args){directoryRoomBefore(...args);roomActivitiesButton.hidden=false;};
+const directoryOutdoorBefore=loadOutdoor;loadOutdoor=function(...args){directoryOutdoorBefore(...args);roomActivitiesButton.hidden=true;};
