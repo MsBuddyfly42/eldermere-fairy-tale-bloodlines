@@ -1117,3 +1117,33 @@ function furnishInteriorScene(kind){
 }
 const furnishedRoomBefore=loadRoom;
 loadRoom=function(kind,name){furnishedRoomBefore(kind,name);furnishInteriorScene(kind);};
+
+
+// Architectural backdrops frame the playable room; no roof hides the orbit camera.
+function buildInteriorBackdrop(kind){
+ const themes={home:'hearth',citizenResidence:'hearth',ancestral:'hearth',manor:'royal',valeEstate:'royal',court:'royal',archive:'library',bloodlines:'library',portraits:'library',owlTreehouse:'story',craft:'workshop',orders:'workshop',carriage:'stable',merchant:'trade',shop:'trade',potion:'herbal',runes:'celestial',orphanage:'dormitory',mysteries:'study',bellcellar:'cellar',garden:'greenhouse',creatures:'sanctuary',oak:'roots',well:'roots',lantern:'festival',game:'festival',tavern:'tavern',silverVillage:'hearth',memoryStage:'story'};
+ const theme=themes[kind]||'hearth',g=new THREE.Group();g.name='Interior architecture '+theme;g.userData.interiorBackdrop={kind,theme,windows:2};root.add(g);
+ const stone=['royal','celestial','cellar','roots'].includes(theme),wood='#604631',trim='#ae9062',wall={royal:'#b7b5a0',cellar:'#777d71',roots:'#7c8872',dormitory:'#9b9c89',herbal:'#a5b7a0',celestial:'#8394a5',story:'#b19a79'}[theme]||'#c6bba0';
+ // Replace the solid back wall with masonry/plaster surrounding two genuinely open windows.
+ for(let n of [...root.children]){if(!n.isMesh||n.geometry.type!=='BoxGeometry')continue;let b=n.geometry.parameters;if(n.position.z<-10.1&&n.position.z>-11.2&&b.width===24&&b.height===5){root.remove(n);n.geometry.dispose();}else if(n.position.z<-10.1&&n.position.z>-10.8&&Math.abs(Math.abs(n.position.x)-7)<1.3&&n.position.y>1.6&&b.depth<.3){root.remove(n);n.geometry.dispose();}}
+ const opts={map:stone?stoneTex:elvenSurface('cloth')};
+ for(let [x,w]of [[-10.1,3.4],[0,11.2],[10.1,3.4]])box(g,x,2.5,-10.85,w,5,.4,wall,opts);
+ for(let x of [-7,7]){box(g,x,.75,-10.85,2.8,1.5,.4,wall,opts);box(g,x,4.7,-10.85,2.8,.6,.4,wall,opts);box(g,x,1.5,-10.5,3.1,.18,.7,trim);for(let s of [-1,1])box(g,x+s*1.45,2.95,-10.55,.14,2.8,.3,wood);referenceBeam(g,[[x-1.45,4.3,-10.5],[x,4.7,-10.5],[x+1.45,4.3,-10.5]],.075);
+  let view=new THREE.Group();view.position.set(x,0,-13);g.add(view);view.userData.windowView=true;
+  box(view,0,2.7,-2,5.2,5.4,.1,'#849db0',{roughness:1});box(view,0,.2,0,5,.4,4,'#627d52');for(let i=0;i<4;i++){let tx=-1.8+i*1.2,tz=-.4-(i%2)*.9;cyl(view,tx,1.7,tz,.12,.22,3.4,'#655039',8);for(let j=0;j<3;j++)sphere(view,tx+Math.sin(i+j)*.4,3+j*.4,tz,.85,'#486d4b',1,1.2,.8);}box(view,0,.42,.6,4,.06,.55,'#a89b7b',{map:stoneTex});
+ }
+ // Upper wall and vault beams stay above and around the room rather than across the camera.
+ for(let z of [-9,-4,2,8])referenceBeam(g,[[-11.4,4.6,z],[-8,6.5,z],[0,8.2,z],[8,6.5,z],[11.4,4.6,z]],.13);
+ for(let side of [-1,1]){box(g,side*11.45,4.5,0,.2,.3,21,wood,{map:floorTex});for(let z of [-7,0,7]){referenceBeam(g,[[side*11.4,1.6,z-1.4],[side*11.35,3.5,z-1.4],[side*11.3,4.2,z],[side*11.35,3.5,z+1.4],[side*11.4,1.6,z+1.4]],.065);}}
+ function panel(x,y,z,w,h,color){return box(g,x,y,z,w,h,.08,color,{map:elvenSurface('cloth')});}
+ function shelves(side,content){for(let y of [1.9,2.7,3.5]){box(g,side*11.15,y,-4,.7,.1,7.5,wood,{map:floorTex});for(let i=0;i<12;i++){let z=-7.4+i*.6;if(content==='books'){box(g,side*11.08,y+.32,z,.4,.55,.23,['#7c5261','#668075','#b29460','#586980'][i%4]);}else{cyl(g,side*11.05,y+.2,z,.12,.15,.4,['#a59c74','#7e9c88','#947d9e'][i%3],10);}}}}
+ if(['library','story','study'].includes(theme)){shelves(-1,'books');shelves(1,'books');panel(0,3,-10.55,3,2,'#a08b65');for(let i=0;i<5;i++)box(g,0,2.5+i*.2,-10.48,2,.018,.015,trim);}
+ if(['hearth','tavern','dormitory'].includes(theme)){for(let side of [-1,1]){panel(side*11.3,2.8,-1,.08,2.5,'#899674').scale.z=25;for(let i=0;i<4;i++){box(g,side*11.05,2.6,-2.2+i*.65,.06,1.5,.45,wood);}}for(let x of [-3,3]){panel(x,3.3,-10.55,1.8,1.25,'#718979');leafCarving(g,x,3.3,-10.45,.35,trim);}}
+ if(theme==='royal'){for(let x of [-9.5,-4.8,4.8,9.5]){cyl(g,x,2.7,-10.3,.2,.3,5.4,'#c2c0ab',16);panel(x,3.7,-10,1,2.7,'#735d82');leafCarving(g,x,3.7,-9.9,.3,'#d3b76c');}referenceBeam(g,[[-10,4.8,-10],[0,7.8,-10],[10,4.8,-10]],.22);}
+ if(['workshop','stable','trade'].includes(theme)){for(let side of [-1,1]){for(let z of [-6,-3,0]){box(g,side*11.1,2.9,z,.12,1.8,2.1,wood,{map:floorTex});if(theme==='stable'){for(let j=0;j<3;j++)box(g,side*10.95,2.7,z-.65+j*.65,.07,1.15,.18,'#a58a63');}else for(let j=0;j<4;j++){let leather=box(g,side*10.95,2.8,z-.7+j*.45,.13,1.1,.35,['#9f775a','#857455','#ad9169'][j%3]);leather.rotation.x=j*.08;}}}panel(0,3,-10.55,4,2,theme==='trade'?'#9a7760':'#876e52');}
+ if(['herbal','greenhouse','sanctuary','roots'].includes(theme)){if(theme==='herbal')shelves(-1,'jars');for(let side of [-1,1])for(let z of [-8,-3,3]){referenceBeam(g,[[side*11.2,0,z],[side*11,2,z+.3],[side*10.5,4,z],[side*9.8,5,z-.7]],theme==='roots'?.2:.035);for(let i=0;i<6;i++)sphere(g,side*(10.8-i*.1),2+i*.4,z+Math.sin(i)*.3,.19,'#62835a',1.4,.6,1);}if(theme==='greenhouse')for(let x of [-9,-5,0,5,9])referenceBeam(g,[[x,5,-10],[x,7,-5],[x,7,5],[x,5,10]],.055);}
+ if(['celestial','cellar'].includes(theme)){for(let x of [-4,0,4]){panel(x,3.4,-10.55,2,2.2,'#536576');for(let i=0;i<7;i++)sphere(g,x+Math.sin(i*2)*.65,3.4+Math.cos(i*2)*.7,-10.44,.045,'#d6d3b1');}for(let side of [-1,1])for(let z of [-7,-2,3])cyl(g,side*11.15,2.4,z,.18,.27,4.8,'#8c9388',12);}
+ if(theme==='festival'){for(let x of [-9,-6,-3,0,3,6,9]){box(g,x,4.7,-8,.025,1,.025,trim);sphere(g,x,4,-8,.28,['#d4b279','#a4bd9b','#c397ad'][Math.abs(x)%3],1,1.4,1);}for(let side of [-1,1])panel(side*9,3.3,-10.5,1.5,2.7,'#97819e');}
+ g.userData.architecture=true;batchWorld(g);return g;
+}
+const architecturalRoomBefore=loadRoom;loadRoom=function(kind,name){architecturalRoomBefore(kind,name);buildInteriorBackdrop(kind);};

@@ -1,3 +1,7 @@
+## Interior architectural backdrops
+- Added themed 3D room surrounds, open forest-view windows, vaulted timber arches, library walls, royal banners, workshop displays and botanical sanctuaries.
+- Preserved playable floors, collision routes, exits and activities; open ceiling design retains orbit-camera visibility.
+
 ## Furnished interiors
 - Added purpose-specific 3D kitchenware, meals, tools, sewing supplies, books, documents, storage, planting supplies, animal bedding and storyhouse seating.
 - Kept existing room activities, exits and collision routes intact; decorative details use room-local batching.
