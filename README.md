@@ -47,3 +47,7 @@ The original story manuscript and adapted chapters are included in dist/stories.
 ## Cottage adventure headquarters
 
 Go home opens your cottage adventure board. Choose investigations, recurring errands, community jobs, family heirlooms, guild work, academy activities, gardening, festival games, or storytelling visits. Existing quest progress remains intact. Adventure coin rewards are recorded in your browser save and collected only at the cottage board; kingdom parcels are turned in there too. Shop sales still pay at the marketplace. Story scenes, evidence, and relationships continue at their original locations.
+
+## Visible physical activities
+
+Gardening, repairs, heirloom crafts, animal care, parcel handling, evidence inspection, records, guild work, council decisions, meals, lanterns, music, runes and trading now use short 3D activity scenes. Click the glowing prop in order; a small activity panel gives the current instruction and Cancel control. Existing shoemaking patterns and story reenactments remain interactive. Archery displays bow/arrow actions and the lantern-catching game uses moving 3D lights. Activity scenes use stylized procedural props and animations, rather than full character motion capture. Completion still uses the original evidence gates, inventory consumption and home reward system. Cancelling or traveling away does not complete the action.
