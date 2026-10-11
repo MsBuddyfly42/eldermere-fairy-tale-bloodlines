@@ -1,0 +1,7 @@
+services:
+  - type: web
+    runtime: static
+    name: eldermere-fairy-tale-bloodlines
+    buildCommand: npm run check
+    staticPublishPath: dist
+    autoDeploy: true

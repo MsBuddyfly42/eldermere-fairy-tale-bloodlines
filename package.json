@@ -1,0 +1,13 @@
+{
+  "name": "eldermere-fairy-tale-bloodlines",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A living 3D elven kingdom adventure",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "node --check dist/game.js && node --check dist/live-realm.js",
+    "test": "npm run check && node tests/core-loop.cjs && node --experimental-vm-modules tests/world.mjs"
+  }
+}

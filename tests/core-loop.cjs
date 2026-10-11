@@ -1,0 +1,9 @@
+const vm=require('vm'),fs=require('fs'),assert=require('assert');let els={};function el(){return {style:{},dataset:{},children:[],classList:{toggle(){}},append(b){this.children.push(b)},insertAdjacentHTML(){},showModal(){this.open=true},close(){this.open=false},getContext(){return {}},click(){},value:''}}const context={document:{getElementById(id){return els[id]??=el()},createElement:el,querySelectorAll(){return []}},localStorage:{getItem(){return null},setItem(){}},window:{addEventListener(){}},requestAnimationFrame(){},setInterval(){},clearInterval(){},setTimeout(){},clearTimeout(){},console,Blob,URL,Date,Math,Set};vm.createContext(context);vm.runInContext(fs.readFileSync('dist/game.js','utf8'),context);vm.runInContext(`
+const assert=(x,m)=>{if(!x)throw Error(m)};
+assert(Object.keys(scenes).length===11,'district count');
+state.coins=80;shop();document.getElementById('modal').children.slice(-5)[0].onclick();assert(state.coins===55&&state.inventory.includes('lantern'),'purchase');home();document.getElementById('modal').children.slice(-3)[0].onclick();assert(state.placed.includes('lantern'),'placement');
+craftStep=3;craftChoice='Waxed leather';craftScreen();document.getElementById('craftarea').children.slice(-3)[0].onclick();assert(state.coins===85&&state.crafted===1,'craft payout');
+state.clues=[];enter('orphanage');assert(state.clues.length===0,'locked orphanage');for(let id of ['archive','manor','oak','orphanage','carriage','merchant'])enter(id);assert(state.clues.length===6,'clue collection');journal();document.getElementById('modal').children.slice(-1)[0].onclick();assert(state.solved,'case resolution');
+let before=state.coins;finishMystery('jewel','done');finishMystery('jewel','done');assert(state.coins===before+25,'no duplicate mystery payout');
+console.log('Passed: 11 districts, shop debit, home placement, crafting payout, clue gate, six-clue solution, one-time mystery rewards.');
+`,context);
