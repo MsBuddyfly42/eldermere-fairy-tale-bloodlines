@@ -1,3 +1,10 @@
+## Mountain castle detail
+- Add full keeps, textured stone foundations and walls, detailed towers and blue roofs, arched windows, balconies and terrace steps to both mountain citadels.
+
+## Ancient woodland and floral understory
+- Add towering mature trees throughout wooded districts and larger trees elsewhere, with meadow flowers, broad ferns and flowering shrubs.
+- Keep new tree trunks and plant clusters clear of paving, doors, activities and river crossings.
+
 ## Remove rectangular woodland water patch
 - Remove the obsolete decorative brook and its rock row from the cottage grounds; retain the main river and mountain waterfall.
 - Restore uninterrupted meadow beside the stone entrance walks.
