@@ -1,3 +1,6 @@
+## Scenery surface stability
+- Separate new paving from overlapping road/entrance surfaces, soften cutout leaf edges, and prevent translucent water layers from writing conflicting depth.
+
 ## Woodland resting places
 - Add usable benches in every district, staggered citizen rest breaks with seated poses, and dense bushes and wild plants off paths.
 - Moving stands the player up beside the chosen bench.
