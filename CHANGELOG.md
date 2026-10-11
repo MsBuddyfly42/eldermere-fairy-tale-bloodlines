@@ -130,3 +130,6 @@ Cragged multi-ring mountains use elevation-colored rock and snow. River ripples 
 
 ### Fishing access and marketplace detail
 Larger permanent fishing signboards advertise click/E, with broader interaction range and a Go fishing shortcut. Fishing shows rod movement and the caught fish. Market stalls gain striped sloping awnings, valances, timber posts, counter boards, produce trays and barrels. Submerged riverbed stones add depth beneath the swimming fish.
+
+### Whispering Cascade
+A layered rocky waterfall feeds directly into the forest river at matching water level, with nine animated translucent streams, falling spray, foam and a connected pool. Visit waterfall shortcut takes the player to a clear viewing bank; bridge routes remain unchanged.
