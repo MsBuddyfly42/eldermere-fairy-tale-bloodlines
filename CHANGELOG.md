@@ -83,3 +83,8 @@ Aurelin, cherished owl of the sacred Memorybough in the Whispering Woods: six pa
 Aurelin now has 16 tales, including ten newly written fairy-tale aftermaths. Room clicks resolve nearby reachable floor around furniture and room edges; ordinary unreachable decor clicks no longer issue the repeated generic path warning.
 
 Living Kingdom: five rotating adventures (repair, hare escort, evidence/choice investigation, harvest donation, melody performance); gift/visit memories; five planting/watering/one-minute-growing/harvesting garden plots; feeding and greeting animals; market trading, recorded royal priorities and a three-shot timing tournament. Includes saved history, controlled payouts, household visits and subtle breathing animation. Browser GPU/layout/audio QA remains unavailable in this environment.
+
+## Complete activity controls and garden plots
+- Added direct gardening at outdoor beds and six conservatory plots, with held tools, seed placement, wet soil, visible pouring and crop growth.
+- Extended physical controls to equipment, decorations, dispatch/rewards, clue handling, wishes and the full shoemaking bench.
+- Added gesture and cancellation checks for both garden types, growth gates, harvest inventory, and activity coverage.
