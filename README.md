@@ -79,4 +79,4 @@ The connected path network joins outdoor entrances and activities to the kingdom
 
 The kingdom is surrounded on all four sides by a layered wilderness of mountains, rolling hills and mixed woodland. This perimeter scenery remains outside the playable districts and roads.
 
-Woodland foliage uses textured individual leaves instead of opaque rounded canopy balls. Meadow textures use consistent world coordinates and moss variation. The Whispering Woods brook stays clear of the stone road, and outdoor pond surfaces sit below the paving.
+Woodland foliage uses textured individual leaves instead of opaque rounded canopy balls. Meadow textures use consistent world coordinates and moss variation. The old rectangular Whispering Woods brook is removed, restoring meadow beside the cottage walkway. Outdoor pond surfaces sit below the paving.

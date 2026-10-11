@@ -1,3 +1,7 @@
+## Remove rectangular woodland water patch
+- Remove the obsolete decorative brook and its rock row from the cottage grounds; retain the main river and mountain waterfall.
+- Restore uninterrupted meadow beside the stone entrance walks.
+
 ## Mountain-fed waterfall
 - Relocate Whispering Cascade into the western mountain foothills between two flanking slopes.
 - Add a continuous animated outlet channel joining the river at its western edge, with streambed and grassy banks. Update Visit waterfall to the new bank.
