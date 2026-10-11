@@ -124,3 +124,6 @@ Removed the original four-sided cone roof meshes and their stripe overlays entir
 
 ### Labels on approach
 Character names show only within six world units; building labels show within ten units of their entrance. Labels hide in whole-world view and follow moving characters. Dialogue, click targets, entrances and controls are preserved.
+
+### Mountains, river life and celestial sky
+Cragged multi-ring mountains use elevation-colored rock and snow. River ripples flow and translucent water reveals 176 animated fish representing eight species. Every district has a fishing-permitted sign and an easy acted cast/bite/reel cycle that saves catches to the satchel. Daytime sky is brighter blue with a visible sun and drifting cloud groups; clear nights show a cratered moon and 650 stars. Existing travel and activity controls are retained.
