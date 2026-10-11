@@ -1276,3 +1276,69 @@ const roomActivitiesButton=document.createElement('button');roomActivitiesButton
 roomActivitiesButton.onclick=()=>{if(!room||handsOnWork||physicalActivity||storyScene)return;modal(room+' · activities','<p>Choose a station. Walk over, then use its tools and activities.</p>');for(let o of objects.filter(o=>o.type!=='exit')){let b=document.createElement('button');b.textContent=o.name;b.onclick=()=>{$('modal').close();walkTo(o.x,o.z,o);};$('modal').append(b);}};
 const directoryRoomBefore=loadRoom;loadRoom=function(...args){directoryRoomBefore(...args);roomActivitiesButton.hidden=false;};
 const directoryOutdoorBefore=loadOutdoor;loadOutdoor=function(...args){directoryOutdoorBefore(...args);roomActivitiesButton.hidden=true;};
+
+// Direct work is the default: no command may finish itself while this screen is open.
+let immersiveEnabled=!!window.EldoriaHandsOn,immersiveOwner=null;
+const immersiveWorkbench=window.EldoriaHandsOn?new window.EldoriaHandsOn.Experience({
+ onSound:(frequency,duration)=>playEffect(frequency,duration,'triangle',.018),
+ onGesture:session=>{if(!session?.pointer)return;player.arms.forEach((arm,i)=>{arm.rotation.x=-.9;arm.rotation.z=(i?-.15:.15)+(session.last.x-480)/1200;});}
+}):null;
+function immersiveRoomImage(){return photographicRoomTexture?.image||(!room?canvas:null);}
+function recordImmersiveWork(title,profile){if(!Array.isArray(state.handsOnHistory))state.handsOnHistory=[];state.handsOnHistory.push({title,profile,day:state.day||1});state.handsOnHistory=state.handsOnHistory.slice(-30);persist();}
+function openImmersiveWork(owner,profile,title,ingredients,done,cancel){
+ if(!immersiveEnabled||!immersiveWorkbench)return;
+ immersiveOwner=owner;owner.manual=true;owner.assisted=false;workPanel.hidden=true;stopTravel();$('modal').close();
+ immersiveWorkbench.start(profile,{title,ingredients,skin:skins[ensureImmersion().skin]||skins.Warm,image:immersiveRoomImage(),onComplete:()=>{
+  if(immersiveOwner!==owner)return;immersiveOwner=null;recordImmersiveWork(title,profile);done();
+ },onCancel:()=>{if(immersiveOwner!==owner)return;immersiveOwner=null;cancel();toast('You left the work unfinished.');}});
+ if(!immersiveWorkbench.image&&roomKind){let session=immersiveWorkbench.active,img=document.createElement('img');img.onload=()=>{if(immersiveWorkbench.active===session)immersiveWorkbench.image=img;};img.src='./assets/interiors/'+(photographicRoomAssets[roomKind]||'cottage')+'.jpg';}
+}
+const tactilePhysicalBefore=startPhysicalActivity;
+startPhysicalActivity=function(profile,done,label='',plot=null){
+ const before=physicalActivity;tactilePhysicalBefore(profile,done,label,plot);let a=physicalActivity;
+ if(!a||a===before||!immersiveEnabled)return;
+ const workProfile=/cupboard|pantry drawer/i.test(label)?'cupboard':profile;
+ const recipe=profile==='kitchen'?harvestRecipes.find(r=>r[0]===label):null;
+ openImmersiveWork(a,workProfile,label||a.spec.title,recipe?resolveRecipeIngredients(recipe):undefined,()=>{
+  if(physicalActivity!==a||a.finished||a.cancelled)return;a.finished=true;let finish=a.done;
+  cancelPhysicalActivity(false);if(profile==='music')playEffect(({Moon:523,Star:659,Leaf:784})[label]||659,.35,'sine',.028);
+  finish();
+ },()=>cancelPhysicalActivity(false));
+};
+const tactileCommandBefore=startCommandActivity;
+startCommandActivity=function(profile,...args){if(!immersiveEnabled){tactileCommandBefore(profile,...args);return;}startPhysicalActivity(profile,...args);};
+const tactileHandsBefore=startHandsOnWork;
+startHandsOnWork=function(type,...args){if(immersiveEnabled&&physicalActivity)return;tactileHandsBefore(type,...args);let w=handsOnWork;if(!w||w.type!==type||!immersiveEnabled)return;
+ openImmersiveWork(w,type,type==='bread'?'Bake woodland bread from scratch':'Brew a healing draught',undefined,()=>{
+  if(handsOnWork!==w||w.finished)return;w.ingredients=type==='bread'?['Flour','Honey','Moonleaf']:['Moonleaf','Springwater','Honey'];w.phase='heat';finishHandsOnWork(w);endHandsOnWork();toast(type==='bread'?'Your freshly baked bread is in your satchel.':'Your healing draught is in your satchel.');
+ },endHandsOnWork);
+};
+const tactileTickBefore=tickPhysicalActivity;
+tickPhysicalActivity=function(dt){if(immersiveEnabled&&immersiveOwner&&immersiveOwner===physicalActivity)return;tactileTickBefore(dt);};
+const tactileAnimateHandsBefore=animateHandsOnWork;
+animateHandsOnWork=function(dt){if(immersiveEnabled&&immersiveOwner&&immersiveOwner===handsOnWork)return;tactileAnimateHandsBefore(dt);};
+const tactileCancelBefore=cancelPhysicalActivity;
+cancelPhysicalActivity=function(...args){if(immersiveOwner&&immersiveOwner===physicalActivity){immersiveOwner=null;immersiveWorkbench?.close();}tactileCancelBefore(...args);};
+const tactileEndBefore=endHandsOnWork;
+endHandsOnWork=function(...args){if(immersiveOwner&&immersiveOwner===handsOnWork){immersiveOwner=null;immersiveWorkbench?.close();}tactileEndBefore(...args);};
+const tactileUseBefore=useCurrentActivity;
+useCurrentActivity=function(){if(immersiveOwner){immersiveWorkbench.canvas.focus?.();return;}tactileUseBefore();};
+function equipRoomForDirectWork(){
+ if(!immersiveEnabled)return;
+ for(let o of objects){
+  if(o.name==='Writing desk'){
+   o.name='Organize your writing desk';o.action=()=>startCommandActivity('decor',()=>{state.deskPrepared=true;persist();toast('Your notebook, quill, and papers are ready.');},'Organize your writing desk');
+  }else if(/Open or close the room cupboard/.test(o.name)){
+   o.action=()=>startCommandActivity('chest',()=>{state.cupboardWork??={};state.cupboardWork[roomKind]=(state.cupboardWork[roomKind]||0)+1;persist();toast('Cupboard closed · the jar is back on its shelf.');},'Open and close the room cupboard');
+  }else if(/^(Examine the festival register|View the family portrait|Inspect the eight heirloom boxes|Inspect the elf’s original tools|Open your evidence journal|Read the family story|Examine the .* heirloom)$/.test(o.name)&&!o.tactileWrapped){
+   let original=o.action;o.action=()=>startCommandActivity(/portrait|heirloom|tools/.test(o.name)?'inspect':'records',original,o.name);o.tactileWrapped=true;
+  }
+ }
+ if(roomKind==='home'&&!objects.some(o=>o.name==='Cook in my cottage')){
+  let station=new THREE.Group();station.position.set(1.5,0,6.5);root.add(station);
+  interactable('Cook in my cottage',1.5,6.5,harvestKitchen,station,2.8);label(station,'Cottage kitchen',0,1.7,0,1.3);
+ }
+}
+const tactileRoomBefore=loadRoom;loadRoom=function(...args){tactileRoomBefore(...args);equipRoomForDirectWork();};
+const tactileAncestralBefore=loadAncestral;loadAncestral=function(...args){tactileAncestralBefore(...args);equipRoomForDirectWork();};
+harvestKitchen=function(){modal('Your cottage kitchen','<p>Work at the preparation board: handle the ingredients, prepare them, mix, manage the hearth, and serve your finished dish. You control each step.</p>');realmMenuButton('Bake woodland bread from scratch',()=>startHandsOnWork('bread'));for(let recipe of harvestRecipes){let ingredients=resolveRecipeIngredients(recipe),b=realmMenuButton('Cook '+recipe[0],()=>makeHarvestRecipe(recipe));b.disabled=!ingredients.every(id=>(ensureImmersion().bag[id]||0)>0);$('modal').insertAdjacentHTML('beforeend','<small>'+ingredients.join(' + ')+' → '+recipe[2]+' servings</small><br>');}};

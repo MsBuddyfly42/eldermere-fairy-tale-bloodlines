@@ -20,6 +20,19 @@ Open http://localhost:8000. Serve the files over HTTP rather than opening index.
 - Your adventure includes Take me there. Map is available on demand; M opens the enlarged map and J the journal.
 - Enable Sound for ambience; click the weather badge to change weather.
 
+## Hands-on work
+
+Room activities open a large interactive canvas work surface over the retained photographic room. The surfaces and tools are illustrated; the room photographs are unchanged. They support mouse, touch, and keyboard input without an additional graphics context or external dependencies.
+
+- The cupboard has a draggable hinged door, shelves, a jar you move to the counter and return, and a closing step.
+- Twelve harvest recipes require ingredient handling, preparation, circular mixing, hearth placement, heat adjustment, actively tended cooking, and serving. Bread adds kneading; potion brewing follows its own ingredients.
+- Thirty-four activity types cover cooking, cupboards, gardening, crafting, animal care, records, trading, parcels, equipment, furniture arrangements, music, runes, fishing, archery, and lanterns.
+- Hold and drag objects into the receiving area. Follow cut/seam guides, work back and forth, circle to stir, tilt to pour, or hold to stamp and tend heat. Keyboard: Enter holds/releases; arrow keys move/work; Escape leaves.
+- Invalid drops and incomplete gestures do not advance. Waiting without input does not finish work. Cancelling or leaving preserves unfinished recipe ingredients and gives no completion reward. Completed recipes use the original inventory and yield rules.
+- **Room activities** finds the stations; **Cook in my cottage** and **Kitchen & harvest** open the recipes. The writing desk activity organizes working materials around the photographic desk.
+
+`tests/hands-on.cjs` checks all activity plans and gesture rules. The world suite checks integration, inventory, rewards, cancellation, cupboard operation, and leaving rooms. Work surfaces can be visually rendered with a standard 2D canvas; the outdoor WebGL scene still needs device testing.
+
 ## Keep your progress
 
 Saves are stored in the current browser and website. Before switching from the existing game to Render, export your progress using the map’s save controls. Import that JSON file on the new site. Different website addresses do not automatically share saves. There is no account or cloud-save backend.
@@ -58,13 +71,10 @@ Garden plots now support direct work at each outdoor bed and all six conservator
 
 Physical work also covers shoemaking from the first material choice, furniture placement/removal, carried equipment, home reward turn-ins, parcel dispatch, clue records and chests, moonwell wishes, trades, and remembrance lanterns. Steps select their own gestures (pull, place, stroke, trace, tilt, hold, turn, or stamp); menus and conversation remain immediately accessible.
 
-Easy controls are now the default: click/tap the highlighted object, press E/Use, or choose the action button. One garden action plays the full digging/planting, watering, or harvesting sequence; baking has single-action stirring and kneading. Precision gestures remain optional under More hands-on controls. Garden beds show four spaced plants, no duplicate crop layer or smaller soil patch, and a basket beside the bed.
 
-Selecting Plant moonleaf, Water the seedlings, or Harvest two moonleaf sprigs immediately begins the visible sequence. Use/E targets the active work directly and does not depend on the nearby-object selection.
 
-The garden now offers 22 crops in every outdoor and conservatory plot: moonleaf, strawberries, carrots, pumpkins, mint, basil, moonflowers, starblossoms, tomatoes, potatoes, corn, wheat, lettuce, onions, peas, apples, blueberries, lavender, rosemary, sunflowers, silverberries and starlight mushrooms. All use the complete sow → water → timed growth → harvest cycle with one-click animated actions, four spaced plants and crop-specific geometry. Each crop has its own growth time (45–90 seconds) and harvest quantity, deposited in the satchel. Existing moonleaf saves and timers continue unchanged.
+The garden now offers 22 crops in every outdoor and conservatory plot: moonleaf, strawberries, carrots, pumpkins, mint, basil, moonflowers, starblossoms, tomatoes, potatoes, corn, wheat, lettuce, onions, peas, apples, blueberries, lavender, rosemary, sunflowers, silverberries and starlight mushrooms. All use the complete sow → water → timed growth → harvest cycle with directly controlled activity steps, four spaced plants and crop-specific geometry. Each crop has its own growth time (45–90 seconds) and harvest quantity, deposited in the satchel. Existing moonleaf saves and timers continue unchanged.
 
-Activity commands now immediately start their full visible sequence, including crafting, equipment, decorations, feeding, gifts, trades, evidence handling and home deliveries/rewards. Easy controls do not require a second confirmation or repeated gesture steps. Archery and lantern-catching retain player input for their game challenges.
 
 ## Everyday life and harvests
 Use **Kitchen & harvest** for twelve crop/fish recipes, market sales and saved flower arrangements. Cooking shows preparation, stirring, heat and serving; original bread/potion activities remain. Canceling leaves ingredients intact. Citizens carry baskets/tools, shoppers visit stalls, guards alternate watches and families head home in the evening. Interiors have moving curtains, opening stocked cupboards and flickering hearths. Turn Sound on for location-based river/waterfall/hearth ambience and grass/stone/wood footstep tones. Mobile rendering uses a lower pixel ratio.

@@ -21,3 +21,14 @@
 
 /* Keep every travel and activity shortcut reachable on smaller screens. */
 #realmFooter{overflow-x:auto;justify-content:flex-start;scrollbar-width:thin}#realmFooter>button{flex:0 0 auto;white-space:nowrap;min-height:30px}#realmFooter>span{flex:0 0 auto;max-width:180px}
+/* Large, direct work surfaces retain the photographic room behind the tools. */
+.eldoria-hands{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:18px;background:#10201df7;overflow:auto;color:#f4ead7}
+.eldoria-hands[hidden]{display:none!important}
+.eldoria-hands-top{width:min(960px,100%);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.eldoria-hands-top h2{margin:0;font-size:clamp(20px,3vw,30px);line-height:1.2}
+.eldoria-hands-top button{min-height:44px;flex-shrink:0;border:1px solid #ac9467;background:#253d33;color:#f6ead4}
+.eldoria-hands-caption{width:min(960px,100%);font-size:clamp(15px,2vw,19px);line-height:1.45;margin:0;min-height:2.5em}
+.eldoria-hands canvas{display:block;width:min(960px,100%,calc((100dvh - 210px)*1.6));height:auto;max-width:100%;border:1px solid #9b815c;border-radius:14px;box-shadow:0 12px 60px #0009;touch-action:none;outline-offset:4px}
+.eldoria-hands progress{width:min(960px,100%);height:15px;accent-color:#aecb88}
+.eldoria-hands-tip{width:min(960px,100%);margin:0;font-size:13px;line-height:1.5;color:#d5d0b9}
+@media(max-width:600px){.eldoria-hands{padding:12px;gap:12px;justify-content:center}.eldoria-hands-top{align-items:flex-start}.eldoria-hands-top button{font-size:13px;padding:10px}.eldoria-hands-caption{min-height:4em}.eldoria-hands canvas{width:100%}}
