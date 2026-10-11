@@ -74,3 +74,5 @@ The elven visual pass adds leaf carvings, silver accents, woven cloth and timber
 Roofs now follow the supplied elven cottage reference: layered blue scalloped shingles, sweeping curved roof surfaces and timber edges, warm arched dormers and slender spires. This is an original procedural 3D interpretation of the reference rather than a reproduction of the illustration.
 
 The whole-scene reference pass extends that style to organic timber facades and doorway frames, warm pointed-arch windows, textured masonry and stone paths, flowering borders, meadow blossoms and ferns, gnarled tree trunks and irregular foliage, distant mountain citadels, dawn/dusk skies and carved interior furniture. It retains the existing world layout and gameplay.
+
+The connected path network joins outdoor entrances and activities to the kingdom roads with collision-aware stone paving. Bridge decks remain timber, with paved approaches at each end. An off-path saved arrival receives a road connector on reload. Travel reuses the same network.

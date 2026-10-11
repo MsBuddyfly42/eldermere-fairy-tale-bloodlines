@@ -150,3 +150,5 @@ Smoother sphere geometry, textured cloth and wood, leaf-carved architectural det
 - Reference-inspired sweeping blue shingle roofs, curved timber fascia, arched dormers and tapered spires across all main buildings, residents’ halls, treehouse and market shelters. Preserves door objects and existing collision footprints.
 
 - Extended the supplied image’s art direction beyond roofs: curved timber-and-stone facades, pointed-arch windows and lanterns, textured masonry paths, flowering borders, ferns and meadows, gnarled trees, cragged mountains with distant citadels, warm dawn/dusk skies, matching interiors and sculpted furniture.
+
+- Connected stone approaches to static outdoor entrances and activities, both ends of all bridges, residents’ halls, treehouse stairs, market counters, gardens and fishing signs. Adds a connector for an off-path saved arrival, and clears instanced trees, flowers and grass from new paths.
