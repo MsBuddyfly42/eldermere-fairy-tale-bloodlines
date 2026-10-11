@@ -68,3 +68,5 @@ Activity commands now immediately start their full visible sequence, including c
 
 ## Everyday life and harvests
 Use **Kitchen & harvest** for twelve crop/fish recipes, market sales and saved flower arrangements. Cooking shows preparation, stirring, heat and serving; original bread/potion activities remain. Canceling leaves ingredients intact. Citizens carry baskets/tools, shoppers visit stalls, guards alternate watches and families head home in the evening. Interiors have moving curtains, opening stocked cupboards and flickering hearths. Turn Sound on for location-based river/waterfall/hearth ambience and grass/stone/wood footstep tones. Mobile rendering uses a lower pixel ratio.
+
+The elven visual pass adds leaf carvings, silver accents, woven cloth and timber surfaces, curved bridge rails, styled interiors, articulated woodland animals, windblown grass and foliage, and animated river surfaces. The **Elven graphics** button offers Balanced, High and Light detail without changing adventure progress. Automated scene checks use a renderer stub; GPU appearance and device performance require a browser check.
