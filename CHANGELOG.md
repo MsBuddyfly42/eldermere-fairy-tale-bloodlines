@@ -110,3 +110,6 @@ Living Kingdom: five rotating adventures (repair, hare escort, evidence/choice i
 
 ### Expanded garden selection
 Added 14 freely available crops, for 22 total, with the same complete one-click acted growing cycle in outdoor and conservatory plots. Added vegetable, grain, sapling, herb and glowing mushroom geometry. All 22 crop cycles are tested in both garden types.
+
+### Clearer kingdom and detailed cottages
+Replaced dense exponential haze with distant linear fog: clear daytime stays unobscured for 140 world units; interiors have no fog. Weather retains gentle distant atmosphere. Cottage exteriors now have pitched tiled gable roofs, stone-textured plaster, masonry plinths, timber framing, shutter slats, layered windows and doors, attic windows and sheltered entrances, within existing walking clearances.
