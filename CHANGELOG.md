@@ -1,3 +1,7 @@
+## Woodland resting places
+- Add usable benches in every district, staggered citizen rest breaks with seated poses, and dense bushes and wild plants off paths.
+- Moving stands the player up beside the chosen bench.
+
 ## Eldoria
 - Rename the player-facing kingdom to Eldoria while retaining the existing save keys and hosting address.
 
