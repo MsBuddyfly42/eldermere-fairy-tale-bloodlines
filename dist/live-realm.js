@@ -1147,3 +1147,19 @@ function buildInteriorBackdrop(kind){
  g.userData.architecture=true;batchWorld(g);return g;
 }
 const architecturalRoomBefore=loadRoom;loadRoom=function(kind,name){architecturalRoomBefore(kind,name);buildInteriorBackdrop(kind);};
+
+
+// Photographic scenery is the room's visible backdrop; gameplay geometry remains interactive.
+const photographicRoomAssets={home:'cottage',citizenResidence:'cottage',ancestral:'cottage',silverVillage:'cottage',manor:'manor',valeEstate:'manor',court:'royal',tavern:'tavern',craft:'workshop',orders:'workshop',archive:'library',bloodlines:'library',portraits:'library',potion:'apothecary',runes:'runes',orphanage:'dormitory',carriage:'stable',merchant:'shop',shop:'shop',mysteries:'study',bellcellar:'cellar',garden:'greenhouse',creatures:'sanctuary',owlTreehouse:'treehouse',memoryStage:'treehouse',oak:'moonwell',well:'moonwell',lantern:'festival',game:'festival'};
+let photographicRoomTexture=null,photographicRoomRequest=0;
+function releaseRoomPhotograph(){photographicRoomRequest++;if(photographicRoomTexture){if(scene3.background===photographicRoomTexture)scene3.background=new THREE.Color('#14272b');photographicRoomTexture.dispose();photographicRoomTexture=null;}}
+function applyRoomPhotograph(texture,kind){if(roomKind!==kind)return;photographicRoomTexture=texture;scene3.background=texture;scene3.backgroundBlurriness=0;skyDome.visible=false;skyClouds.visible=false;
+ const protectedNodes=new Set();for(let o of objects){let n=o.node;while(n&&n!==root){protectedNodes.add(n);n=n.parent;}}
+ for(let n of npcs){let node=n.group;while(node&&node!==root){protectedNodes.add(node);node=node.parent;}}
+ for(let n of root.children){if(n.userData.referenceFurniture||protectedNodes.has(n))continue;n.visible=false;}
+ root.userData.photographicBackdrop=photographicRoomAssets[kind]||'cottage';
+}
+function loadRoomPhotograph(kind){releaseRoomPhotograph();let request=photographicRoomRequest,img=document.createElement('img');img.onload=()=>{if(request!==photographicRoomRequest||roomKind!==kind)return;let texture=new THREE.Texture(img);texture.colorSpace=THREE.SRGBColorSpace;texture.minFilter=THREE.LinearFilter;texture.generateMipmaps=false;texture.needsUpdate=true;applyRoomPhotograph(texture,kind);};img.onerror=()=>{if(request===photographicRoomRequest)console.warn('Room photograph unavailable; keeping 3D interior.',kind);};img.src='./assets/interiors/'+(photographicRoomAssets[kind]||'cottage')+'.jpg';}
+const photographicLoadRoomBefore=loadRoom;loadRoom=function(kind,name){photographicLoadRoomBefore(kind,name);loadRoomPhotograph(kind);};
+const photographicLoadOutdoorBefore=loadOutdoor;loadOutdoor=function(...args){releaseRoomPhotograph();photographicLoadOutdoorBefore(...args);};
+const photographicLightingBefore=setLighting;setLighting=function(...args){photographicLightingBefore(...args);if(room&&photographicRoomTexture)scene3.background=photographicRoomTexture;};

@@ -1,3 +1,8 @@
+## Photographic interior scenery
+- Replaced visible generic room surrounds with 18 photographic-style elven interior images, mapped to all 29 room types.
+- Retained interactive furniture, characters, activities, exits and controls in front of the photographic scenery.
+- Loads only the current room photograph, releases textures on travel, and keeps the 3D interior as a loading/error fallback.
+
 ## Interior architectural backdrops
 - Added themed 3D room surrounds, open forest-view windows, vaulted timber arches, library walls, royal banners, workshop displays and botanical sanctuaries.
 - Preserved playable floors, collision routes, exits and activities; open ceiling design retains orbit-camera visibility.
