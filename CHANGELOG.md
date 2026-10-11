@@ -133,3 +133,8 @@ Larger permanent fishing signboards advertise click/E, with broader interaction 
 
 ### Whispering Cascade
 A layered rocky waterfall feeds directly into the forest river at matching water level, with nine animated translucent streams, falling spray, foam and a connected pool. Visit waterfall shortcut takes the player to a clear viewing bank; bridge routes remain unchanged.
+
+### River-facing fishing and mountain gorge
+Fishing is anchored to the real north riverbank: the elf faces the water, casts a visible line and bobber into the channel, waits for a bite and lifts the fish back to shore. Removed the temporary miniature pool and reverse-facing activity camera. Two steep mountains frame Whispering Cascade while preserving bridge and viewing-bank clearance.
+
+Fishing polish: rod-to-bobber line remains connected while reeling; fish have dorsal and paired fins. Catch completion keeps the elf at the riverbank with Fish again/Keep exploring choices. Subtle casting/catch sounds follow Sound settings. The waterfall shortcut uses a camera angle toward the gorge.
