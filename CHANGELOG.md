@@ -94,3 +94,8 @@ Living Kingdom: five rotating adventures (repair, hare escort, evidence/choice i
 - One garden action performs the visible sequence; simplify stirring and kneading.
 - Remove the nested soil patch and duplicate crops; space four plants and move the basket beside the bed.
 - Verify easy completion, cancellation, duplicate-click safety and crop geometry ownership.
+
+## Activity start fix
+- Start garden work immediately from the selected action.
+- Route Use/E directly to active work and accept easy clicks across the bed.
+- Check completion through the real update loop, not only isolated activity ticks.

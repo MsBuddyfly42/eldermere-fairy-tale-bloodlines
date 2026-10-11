@@ -59,3 +59,5 @@ Garden plots now support direct work at each outdoor bed and all six conservator
 Physical work also covers shoemaking from the first material choice, furniture placement/removal, carried equipment, home reward turn-ins, parcel dispatch, clue records and chests, moonwell wishes, trades, and remembrance lanterns. Steps select their own gestures (pull, place, stroke, trace, tilt, hold, turn, or stamp); menus and conversation remain immediately accessible.
 
 Easy controls are now the default: click/tap the highlighted object, press E/Use, or choose the action button. One garden action plays the full digging/planting, watering, or harvesting sequence; baking has single-action stirring and kneading. Precision gestures remain optional under More hands-on controls. Garden beds show four spaced plants, no duplicate crop layer or smaller soil patch, and a basket beside the bed.
+
+Selecting Plant moonleaf, Water the seedlings, or Harvest two moonleaf sprigs immediately begins the visible sequence. Use/E targets the active work directly and does not depend on the nearby-object selection.
