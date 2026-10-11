@@ -1,0 +1,15 @@
+const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');
+let queue=[],spoken=[],cancelled=0,open=true,voices=[];
+const source=fs.readFileSync('dist/live-realm.js','utf8').split('// Character narration:')[1].split('const narrationModalBefore=modal;')[0];
+const ctx=vm.createContext({window:{speechSynthesis:{cancel(){cancelled++},getVoices(){return voices},speak(u){spoken.push(u)}},SpeechSynthesisUtterance:class{constructor(text){this.text=text}}},state:{},$:()=>({open}),clearTimeout(){},setTimeout(fn){queue.push(fn);return queue.length},toast(){},console});
+vm.runInContext("//"+source,ctx);
+voices=[{name:'Samantha',lang:'en-US',voiceURI:'sam'},{name:'Daniel',lang:'en-GB',voiceURI:'dan'}];
+vm.runInContext("narrateTale('Come closer. Who is there? Wonderful!','owl')",ctx);queue.shift()();
+assert.equal(spoken[0].voice.voiceURI,'dan');assert.equal(spoken[0].rate,.87);
+spoken[0].onend();queue.shift()();assert.equal(spoken[1].pitch,1.12);
+spoken[1].onend();vm.runInContext('stopTaleNarration()',ctx);queue.shift()();assert.equal(spoken.length,2,'cancelled queue must not resume');
+vm.runInContext("state.owlVoice='sam';narrateTale('A chosen voice.','owl')",ctx);queue.shift()();assert.equal(spoken.at(-1).voice.voiceURI,'sam');
+vm.runInContext("narrateTale('Another chapter.','narrator')",ctx);queue.shift()();assert.equal(spoken.at(-1).rate,.96);
+voices=[];vm.runInContext("narrateTale('Fallback.','owl')",ctx);queue.shift()();assert.equal(spoken.at(-1).lang,'en-GB');
+spoken.at(-1).onend();open=false;queue.shift()();assert.equal(spoken.length,5,'closed dialog must stop continuation');
+assert(cancelled>=5);console.log('Passed: distinct narrator/owl profiles, English voice selection, saved choice, sentence expression, missing-voice fallback, and cancelled/closed-dialog queue safety.');
