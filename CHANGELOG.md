@@ -1,3 +1,7 @@
+## Furnished interiors
+- Added purpose-specific 3D kitchenware, meals, tools, sewing supplies, books, documents, storage, planting supplies, animal bedding and storyhouse seating.
+- Kept existing room activities, exits and collision routes intact; decorative details use room-local batching.
+
 ## Mobile graphics recovery
 - Cap phone rendering resolution and shadow size, reduce foliage geometry and distant forest layers on phones while retaining giant trees.
 - Show a reload control if WebGL context is lost, without changing saved adventure data.

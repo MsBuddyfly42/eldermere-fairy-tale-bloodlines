@@ -1074,3 +1074,46 @@ function stabilizeScenerySurfaces(){worldCache.root.traverse(n=>{if(!n.isMesh||!
 stabilizeScenerySurfaces();
 
 const graphicsRecovery=document.createElement('div');graphicsRecovery.hidden=true;graphicsRecovery.style.cssText='position:absolute;inset:35% 10% auto;padding:20px;background:#17372e;color:#fff;z-index:30;border-radius:16px;text-align:center';graphicsRecovery.innerHTML='<p>The graphics paused. Your saved adventure is safe.</p>';let resumeGraphics=document.createElement('button');resumeGraphics.textContent='Reload the world';resumeGraphics.onclick=()=>location.reload();graphicsRecovery.append(resumeGraphics);canvas.parentElement.append(graphicsRecovery);canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();graphicsRecovery.hidden=false;});canvas.addEventListener('webglcontextrestored',()=>{graphicsRecovery.hidden=true;renderer.shadowMap.needsUpdate=true;});
+
+
+// Furnished room scenes: details stay on furniture or against walls, leaving activity routes intact.
+function furnishInteriorScene(kind){
+ const decor=new THREE.Group();decor.name='Furnished '+kind;decor.userData.furnishedInterior=kind;root.add(decor);
+ const wood='#715139',linen='#e8dcc2',brass='#bf9b59';
+ function prop(type,x,y,z,scale=1){let g=new THREE.Group();g.position.set(x,y,z);g.scale.setScalar(scale);g.userData.interiorProp=type;decor.add(g);
+  if(type==='books'){for(let i=0;i<4;i++){box(g,0,.055+i*.11,0,.65,.095,.48,['#54786b','#975f57','#4e637f','#b0986b'][i]);box(g,0,.055+i*.11,.245,.56,.055,.015,linen);}}
+  else if(type==='meal'){for(let x of [-.5,.5]){cyl(g,x,.025,0,.32,.32,.05,linen,20);sphere(g,x,.13,0,.22,'#c69c62',1,.48,.8);cyl(g,x,.15,-.48,.12,.1,.3,'#a79068',12);}box(g,0,.015,0,.05,.03,1.35,brass);}
+  else if(type==='bottles'){for(let i=0;i<4;i++){let x=(i-1.5)*.32;cyl(g,x,.22,0,.12,.14,.44,['#83a993','#ba9867','#8a799e','#759dad'][i],12);cyl(g,x,.49,0,.055,.06,.14,brass,10);}}
+  else if(type==='basket'){cyl(g,0,.18,0,.4,.3,.36,'#b7996a',16);for(let i=0;i<7;i++)sphere(g,Math.sin(i*2)*.22,.39,Math.cos(i*2)*.22,.12,['#ad694f','#8ca76a','#d4b570'][i%3]);}
+  else if(type==='tools'){for(let i=0;i<3;i++){let tool=new THREE.Group();g.add(tool);tool.position.set((i-1)*.5,.09,0);tool.rotation.y=i*.45;box(tool,0,0,0,.07,.07,.75,wood);box(tool,0,.03,-.28,.32,.13,.12,'#a8aaa1');}sphere(g,.65,.14,.25,.2,'#b58561',1,.35,1);}
+  else if(type==='sewing'){for(let i=0;i<3;i++){cyl(g,(i-1)*.35,.18,0,.12,.12,.36,['#9d6577','#758dac','#c1a466'][i],12);cyl(g,(i-1)*.35,.37,0,.15,.15,.04,wood,12);}box(g,0,.025,.5,1.3,.04,.48,'#b78962');}
+  else if(type==='papers'){for(let i=0;i<3;i++){let paper=box(g,i*.12,.01+i*.018,0,.8,.015,.6,linen);paper.rotation.y=i*.16;for(let j=0;j<4;j++)box(g,i*.12,.023+i*.018,-.18+j*.1,.45,.008,.012,'#6b695a');}cyl(g,.7,.13,0,.1,.11,.26,'#4b5564',12);let quill=box(g,.76,.48,0,.035,.65,.04,linen);quill.rotation.z=-.3;}
+  else if(type==='tea'){cyl(g,0,.24,0,.26,.22,.48,'#96aaa0',16);sphere(g,0,.48,0,.27,'#96aaa0',1,.25,1);cyl(g,0,.56,0,.055,.07,.1,brass);for(let x of [-.6,.6])cyl(g,x,.1,.25,.13,.1,.2,linen,12);}
+  else if(type==='cushion'){box(g,0,.12,0,.8,.24,.7,'#758879',{map:elvenSurface('cloth')});}
+  else if(type==='planter'){cyl(g,0,.22,0,.25,.2,.44,'#ab805c');for(let i=0;i<5;i++){cyl(g,Math.sin(i)*.1,.6,Math.cos(i)*.1,.015,.02,.6,'#73845b');sphere(g,Math.sin(i)*.16,.9,Math.cos(i)*.16,.12,['#bd8ca9','#dcb979','#839d6a'][i%3],1,.6,1);}}
+  else if(type==='boots'){for(let x of [-.3,.3]){box(g,x,.13,.12,.34,.25,.65,'#835e42');cyl(g,x,.38,-.08,.16,.17,.5,'#835e42',12);}}
+  return g;
+ }
+ function wallShelf(x,z,contents){box(decor,x,2.15,z,3.4,.14,.65,wood,{map:floorTex});for(let side of [-1,1])box(decor,x+side*1.3,1.92,z,.12,.45,.45,wood);prop(contents,x,2.24,z,.9);}
+ function cabinet(x,z,contents){box(decor,x,.8,z,2.2,1.6,.8,wood,{map:floorTex});for(let side of [-1,1]){box(decor,x+side*.52,.83,z+.43,.95,1.35,.08,'#927151',{map:floorTex});sphere(decor,x+side*.15,.85,z+.49,.055,brass);}prop(contents,x,1.63,z,.9);}
+ // Common entrance furnishings remain against the front corners.
+ for(let side of [-1,1]){box(decor,side*10.7,1.8,8.4,.09,3.6,2.2,wood);for(let i=0;i<3;i++){sphere(decor,side*10.62,2.7,7.8+i*.5,.07,brass);}prop('planter',side*10.1,0,9.2,1.4);}
+ const domestic=['home','citizenResidence','ancestral','manor','valeEstate','silverVillage'];
+ if(domestic.includes(kind)){cabinet(5,-9.8,'tea');wallShelf(-5,-10,'books');if(['home','ancestral','manor'].includes(kind))prop('meal',0,1.3,-2);prop('basket',5,0,-9.3);if(kind==='home')prop('sewing',7,1.3,-6,.8);box(decor,9.8,.75,-7.5,1.5,1.5,1.1,'#9b8e78',{map:stoneTex});for(let i=0;i<2;i++)cyl(decor,9.8,.1+1.5,-7.7+i*.45,.27,.27,.05,'#383e38',16);wallShelf(8,-10,'bottles');if(['home','ancestral'].includes(kind))prop('books',-8,1.22,kind==='home'?-6.4:-7.4,.6);}
+ else if(kind==='tavern'){for(let x of [-6,6])for(let z of [-3,3])prop('meal',x,1.3,z);prop('tea',-7,1.3,-8);wallShelf(-7,-10,'bottles');cabinet(9,-9.7,'basket');for(let z of [-8,-6]){cyl(decor,10,.6,z,.6,.5,1.2,wood,16);for(let y of [.25,.95])cyl(decor,10,y,z,.61,.61,.08,'#6c7066',16);}prop('basket',8,0,-8);}
+ else if(['craft','orders','carriage'].includes(kind)){for(let x of [-7,7]){if(kind!=='carriage')prop('tools',x,1.3,-3);wallShelf(x,-10,'sewing');}if(kind!=='carriage'){prop('boots',0,1.3,-5);prop('papers',7,1.3,3);}else prop('papers',0,1.3,-1);cabinet(-9,-9.8,'tools');for(let i=0;i<3;i++)box(decor,9.9,.3+i*.18,-7,1.3,.15,2.4,'#a3845e',{map:floorTex});}
+ else if(['archive','bloodlines','portraits','mysteries','merchant','bellcellar'].includes(kind)){if(['archive','mysteries','merchant'].includes(kind))prop('papers',0,1.3,kind==='archive'?-6:-5);wallShelf(-5,-10,'books');wallShelf(5,-10,'papers');cabinet(-10,-9.8,'books');if(kind==='mysteries'){box(decor,0,2.8,-10,4.2,2.2,.12,wood);for(let i=0;i<7;i++)box(decor,-1.5+i*.48,2.7+(i%2)*.4,-9.9,.4,.55,.035,linen);}}
+ else if(['potion','runes'].includes(kind)){prop('bottles',0,1.3,kind==='potion'?-5:-2);prop('papers',-1,1.3,kind==='potion'?-5:-2,.6);for(let x of [-5,5])wallShelf(x,-10,'bottles');cabinet(-10,-9.8,'basket');cyl(decor,9,.7,-8,.65,.5,1.4,'#6c776e',16);cyl(decor,9,1.41,-8,.53,.53,.025,'#99b6a3',16);}
+ else if(kind==='orphanage'){for(let x of [-8,8])for(let z of [-7,-1,5]){prop('cushion',x,1.22,z+.7,.8);prop('books',x,1.22,z-1.3,.5);}wallShelf(-4,-10,'basket');wallShelf(4,-10,'books');prop('papers',0,1.3,-6);}
+ else if(kind==='owlTreehouse'){prop('books',-4,1.3,-3);prop('tea',-3,1.3,-3,.65);wallShelf(-7,-10,'papers');for(let x of [-8,-5,-2]){box(decor,x,.3,5,1.8,.6,1.6,wood);prop('cushion',x,.6,5,1.6);}cabinet(9,-9.8,'books');}
+ else if(kind==='court'){prop('papers',0,1.3,0);for(let x of [-5,5]){box(decor,x,.65,-8,1.8,.25,1.2,wood);prop('cushion',x,.8,-8,1.5);wallShelf(x,-10,'books');}for(let x of [-10,10]){cyl(decor,x,1.1,-8,.35,.55,2.2,'#a6a28e');prop('planter',x,2.2,-8,1.4);}}
+ else if(['garden','creatures','oak','well'].includes(kind)){wallShelf(-5,-10,'basket');wallShelf(5,-10,'bottles');cabinet(10,-9.8,'tools');for(let x of [-9,9]){prop('basket',x,0,8);prop('planter',x,0,-9,1.5);}if(kind==='creatures')for(let x of [-7,0,7]){box(decor,x,.06,-6.5,2.5,.12,1.8,'#bfa574',{map:elvenSurface('cloth')});cyl(decor,x+1,.1,-4,.25,.3,.2,'#9da6a0',16);}}
+ else {cabinet(-9,-9.8,kind==='shop'?'basket':'books');wallShelf(5,-10,kind==='lantern'?'tools':'tea');if(['game','lantern'].includes(kind))prop('papers',0,1.3,kind==='game'?-4:-2);}
+ // Match the elven timber and stone palette without adding lights or movement obstacles.
+ decor.traverse(n=>{if(n.isMesh&&n.material){n.castShadow=true;n.receiveShadow=true;}});
+ decor.userData.propCount=decor.children.filter(n=>n.userData.interiorProp).length;
+ batchWorld(decor);
+ return decor;
+}
+const furnishedRoomBefore=loadRoom;
+loadRoom=function(kind,name){furnishedRoomBefore(kind,name);furnishInteriorScene(kind);};
