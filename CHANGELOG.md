@@ -1,3 +1,10 @@
+## Natural woodland and clear ground
+- Extend all twenty-two building entrance walks to the street center, leaving junctions open.
+- Replace rounded foliage balls throughout the kingdom with textured individual leaf clusters.
+- Recess ponds below paving and shorten the Whispering Woods brook so it no longer crosses the road. Remove the floating row of rock spheres there.
+- Add consistent world-scaled meadow texture and moss variation; irregular foothill silhouettes.
+- Preserve unique custom geometry when batching scenery.
+
 ## Encircling wilderness
 - Surround the kingdom on all four sides with cragged mountains, rolling foothills and three layers of varied woodland.
 - Keep scenery outside the playable districts and retain controls, travel and saved progress.
