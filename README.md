@@ -37,6 +37,13 @@ Room activities open a large interactive canvas work surface over the retained p
 
 Saves are stored in the current browser and website. Before switching from the existing game to Render, export your progress using the map’s save controls. Import that JSON file on the new site. Different website addresses do not automatically share saves. There is no account or cloud-save backend.
 
+Open **Map → Save & backups** to download current progress, restore a downloaded JSON file, or download/restore the previous automatic backup. Restoring valid progress reloads the world and keeps your current saved progress as the fallback backup. Existing Eldoria JSON exports remain supported, including invitations for Pip, Fern and Liora.
+
+Saves are checked before loading or importing, including nested inventory, quest, crop, and reward records. An unreadable primary save is preserved under a separate browser storage key before recovering a valid fallback. If neither copy is usable, autosaving pauses so it cannot overwrite the original; restore a downloaded backup or explicitly start a new save. Storage denial and quota failures display a warning, and you can still download your in-memory progress.
+
+The automatic fallback is retained through rapid autosaves and reloads, and refreshes after five minutes of continuous play. The game also saves when its page is hidden or closed. Browser backups can still be lost when site data is cleared: keep a downloaded copy elsewhere. There is no cross-device sync.
+
+
 ## Check the project
 
 Node.js 22 or newer:
@@ -90,3 +97,4 @@ The connected path network joins outdoor entrances and activities to the kingdom
 The kingdom is surrounded on all four sides by a layered wilderness of mountains, rolling hills and mixed woodland. This perimeter scenery remains outside the playable districts and roads.
 
 Woodland foliage uses textured individual leaves instead of opaque rounded canopy balls. Meadow textures use consistent world coordinates and moss variation. The old rectangular Whispering Woods brook is removed, restoring meadow beside the cottage walkway. Outdoor pond surfaces sit below the paving.
+
