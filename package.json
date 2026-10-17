@@ -8,6 +8,6 @@
   },
   "scripts": {
     "check": "node --check dist/game.js && node --check dist/live-realm.js && node --check dist/hands-on.js",
-    "test": "npm run check && node tests/core-loop.cjs && node --experimental-vm-modules tests/world.mjs && node tests/narration.cjs && node tests/hands-on.cjs"
+    "test": "npm run check && node tests/save-startup.cjs && node tests/core-loop.cjs && node --experimental-vm-modules tests/world.mjs && node tests/narration.cjs && node tests/hands-on.cjs"
   }
 }
