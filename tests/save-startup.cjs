@@ -2,7 +2,7 @@ const vm = require('node:vm');
 const fs = require('node:fs');
 const assert = require('node:assert/strict');
 
-const source = fs.readFileSync('dist/game.js', 'utf8');
+const source = (fs.readFileSync('dist/save-system.js', 'utf8')+'\n'+fs.readFileSync('dist/game.js', 'utf8'));
 const districts = ['capital', 'workshop', 'market', 'home', 'academy', 'forest', 'forgotten', 'festival', 'court', 'gardens', 'library'];
 for (const scene of districts) {
   const elements = {};
@@ -13,7 +13,7 @@ for (const scene of districts) {
   }
   const context = vm.createContext({
     document: {getElementById(id) {return elements[id] ??= element();}, createElement: element, querySelectorAll() {return [];}},
-    localStorage: {getItem() {return JSON.stringify(save);}, setItem(key, value) {writes.push(JSON.parse(value));}},
+    localStorage: {getItem() {return JSON.stringify(save);}, setItem(key, value) {if(key === 'templar-eldermere-v1') writes.push(JSON.parse(value));}},
     window: {addEventListener() {}}, setInterval() {}, setTimeout() {}, clearTimeout() {}, console, Date, Math, Set
   });
   assert.doesNotThrow(() => vm.runInContext(source, context), `Reloading a save in ${scene} must start the game`);
