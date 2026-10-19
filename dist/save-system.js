@@ -32,6 +32,8 @@ window.EldoriaSaves = (() => {
     witnessQuest: x => required({stage: text})(x) && shape({stage: oneOf(['available', 'follow', 'listen', 'letter', 'verify', 'seal', 'complete']), observed: number, rewarded: bool})(x),
     bellCase: x => required({stage: text})(x) && shape({stage: oneOf(['available', 'opening', 'search', 'question', 'follow', 'workshop', 'cellar', 'decision', 'complete']), clues: unique(text), answers: unique(text), rewarded: bool, choice: x => x === null || text(x)})(x),
     silverStory: x => required({step: count})(x) && shape({step: x => count(x) && x <= 11, spoken: unique(text), rewarded: bool})(x),
+    cityFortune: shape({initialized: bool, seen: map(count), waiting: map(count), made: count, earned: count, gift: count, nights: count, lastDawn: count, ledger: list(text)}),
+    cityHeritage: shape({progress: map(x => count(x) && x <= 6), completed: map(bool), spells: map(bool), exhibits: unique(text), magicOn: bool}),
     cityAtmosphere: shape({clock: oneOf(['real']), timeZone: text, hemisphere: oneOf(['north','south']), seasonMode: oneOf(['real','manual']), season: oneOf(['spring','summer','autumn','winter']), weatherMode: oneOf(['seasonal','manual']), weather: oneOf(['clear','rain','sleet','snow','thunderstorm','snowstorm','blizzard']), sound: bool, musicVolume: x => number(x) && x <= 1, effectsVolume: x => number(x) && x <= 1}),
     cityExperience: shape({openingSeen: bool, investigations: map(required({found: unique(text), solved: bool}))}),
     cityLife: shape({v: x => x === 1, xp: count, questSteps: count, shifts: count, games: count,

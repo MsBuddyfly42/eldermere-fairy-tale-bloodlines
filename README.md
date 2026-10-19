@@ -135,3 +135,15 @@ The default clock now follows the real Gregorian date and time, initially Americ
 Enable elven music & sound starts an original synthesized Dorian harp/flute score, investigation variation, and rain, sleet, soft snow wind, storm wind and thunder layers. Sound requires a user gesture, pauses in hidden tabs, and has separate music/effects sliders plus mute. No external audio service or downloads are required. Reopening a saved visit asks the player to resume sound.
 
 Additional checks: `node tests/city-experience-browser.cjs` tests the complete prologue, search/reconstruction/save gates, all six purchased furnishings and a sewing interaction, real calendar/month navigation/timezones/midnight, all weather/seasons, actual WebAudio start/mute and mobile layout. Pure rules for investigations, Gregorian dates, DST and seasons run with `npm test`.
+
+## The original shoemaker's shop and living midnight magic
+
+The Shoemaker's Quarter now has two distinct shops: the existing Silverstitch Workshop for present-day work and **The Original Shoemaker's Shop**, a furnished interpretation of the cottage from *The Elves and the Shoemaker*. The preserved room includes the bench, hand tools, hearth, curtain, living/sleeping furnishings, and tiny thank-you clothes. Six objects carry memories of the original tale. A six-stage playable retelling follows the last leather, the first night, the first customer, the discovery behind the curtain, the gift-making, and the elves' freedom to leave.
+
+Magic & the original shop also opens nine activity chains, the Hall of Shared Memories in the library district, and the Spell Atelier in the academy. Activities teach Mending Light, Waylight and Bloomcall and award their first completion once; practice remains available. New rooms restore correctly from saved cityView. Ambient lights honor reduced-motion and can be quieted.
+
+**The midnight blessing** is an ongoing mechanic. Completed boots, academy work, garden harvests, productive career shifts, built home projects and first heritage completions receive an elven-finished quality record and five extra mooncoins. Existing completed work is baselined when this feature first loads. Saves and repeated render calls never re-award the same creation. Overnight work is queued in the saved fortune ledger.
+
+Between real local midnight and 6 a.m. the original shop shows the helpers' heightened stitching magic. At the next real dawn, a pair worth 12 mooncoins plus two per queued creation waits at the original shop. Returning after an offline night resolves the saved queue; claiming the gift requires visiting that shop and pays once. Neither memory reenactments nor rest change the real clock.
+
+`tests/city-heritage.cjs` and `tests/city-fortune.cjs` run with npm test. `node tests/city-heritage-browser.cjs` exercises the original shop, preserved objects, full retelling, new rooms, spell learning/casting, save compatibility and phone layout. `node tests/city-midnight-browser.cjs` completes actual shoemaking, checks its extra quality payout, advances a mocked real clock through midnight/dawn, collects the saved morning gift once and verifies reload protection.
