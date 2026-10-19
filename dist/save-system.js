@@ -32,6 +32,12 @@ window.EldoriaSaves = (() => {
     witnessQuest: x => required({stage: text})(x) && shape({stage: oneOf(['available', 'follow', 'listen', 'letter', 'verify', 'seal', 'complete']), observed: number, rewarded: bool})(x),
     bellCase: x => required({stage: text})(x) && shape({stage: oneOf(['available', 'opening', 'search', 'question', 'follow', 'workshop', 'cellar', 'decision', 'complete']), clues: unique(text), answers: unique(text), rewarded: bool, choice: x => x === null || text(x)})(x),
     silverStory: x => required({step: count})(x) && shape({step: x => count(x) && x <= 11, spoken: unique(text), rewarded: bool})(x),
+    cityLife: shape({v: x => x === 1, xp: count, questSteps: count, shifts: count, games: count,
+      jobs: map(count), worked: map(bool), quests: map(required({step: x => count(x) && x <= 3, complete: bool})),
+      friends: map(count), social: map(bool), bag: map(count), daily: map(shape({jobs: count, quests: count, games: count, talks: count, discoveries: count})),
+      claimed: map(bool), discoveries: map(bool), upgrades: map(bool), played: map(bool), collection: unique(text), history: list(text),
+      activeJob: required({id: text, key: text, day: count, step: x => count(x) && x < 2}),
+      activeGame: required({id: text, key: text, step: x => count(x) && x < 2})}),
     endlessAdventure: x => required({completed: count})(x) && shape({stage: oneOf(['collect', 'deliver'])})(x),
     community: x => required({completed: count, step: count})(x) && shape({clues: unique(text), history: list(required({title: text, choice: text})), harePosition: point})(x),
     life: shape({bag: map(count), family: map(oneOf(['new', 'found', 'complete'])), events: map(bool), furniture: map(point), drawer: bool, outfit: oneOf(['Twilight', 'Moss', 'Rose', 'Ember']), hair: oneOf(['Chestnut', 'Silver', 'Gold']), skin: oneOf(['Warm', 'Deep', 'Porcelain'])}),
@@ -150,3 +156,4 @@ window.EldoriaSaves = (() => {
   }
   return {load, validate, parse, write, checkpoint, download, backup, startNew, status, limit, get blocked() {return blocked;}, get notice() {return notice;}, get lastSaved() {return lastSaved;}};
 })();
+

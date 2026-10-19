@@ -117,3 +117,11 @@ Woodland foliage uses textured individual leaves instead of opaque rounded canop
 ## City browser checks
 
 With Playwright installed, `node tests/city-browser.cjs` verifies all photographic districts, street/room/activity transitions, the six-clue investigation, crafting, shopping, home placement, alchemy, lantern games, save preservation, treehouse exterior/interior, stories, saved-room resume, viewpoint controls, and phone navigation. The direct-presentation suite explicitly uses `?view=direct`. Screenshots go to the system temporary directory or `ELDORIA_SCREENSHOTS_DIR`.
+
+## Playable manuscript and neighborhood life
+
+The default city view now puts **The Eight Silver Stitches** campaign first. Eleven saved objectives carry the player from the awakened archive book through the hidden village, Dain's rescue, eight sibling conversations, a chosen reunion welcome, the evidence hearing and the festival. `silverStory` is shared with existing 3D saves; campaign completion awards its 150 coins only once. The manuscript remains available under Family story.
+
+Adventures & jobs opens eight careers with three promotion ranks, eight three-step neighborhood quests, five two-round leisure challenges, eight friendships, eleven district discoveries, daily objectives, collections and six cottage projects. Work and leisure pay once per activity per game day. Sleep at the cottage opens the next day. Side activities are optional and never charge an entry fee for the campaign. Home projects are remembered in the cottage's Made by you panel; they do not replace the photographic room backdrop.
+
+`npm test` includes pure campaign/life rules. `node tests/city-story-browser.cjs` runs the complete campaign, every sibling conversation, a work shift, a full neighborhood quest, daily/social reward caps, save/reload and phone layout in Chromium. Existing city and direct browser suites remain available.

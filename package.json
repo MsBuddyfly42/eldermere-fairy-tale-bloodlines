@@ -7,7 +7,7 @@
     "node": ">=22"
   },
   "scripts": {
-    "check": "node --check dist/save-system.js && node --check dist/game.js && node --check dist/live-realm.js && node --check dist/hands-on.js && node --check dist/play-mode.js && node --check dist/comfortable-realm.js && node --check dist/city-realm.js && node --check dist/owl-tales.js",
-    "test": "npm run check && node tests/save-reliability.cjs && node tests/save-startup.cjs && node tests/core-loop.cjs && node tests/input-controls.cjs && node --experimental-vm-modules tests/world.mjs && node tests/narration.cjs && node tests/hands-on.cjs"
+    "check": "node --check dist/save-system.js && node --check dist/game.js && node --check dist/live-realm.js && node --check dist/hands-on.js && node --check dist/play-mode.js && node --check dist/comfortable-realm.js && node --check dist/city-realm.js && node --check dist/owl-tales.js && node --check dist/city-life-model.js && node --check dist/city-story-model.js && node --check dist/city-life.js",
+    "test": "npm run check && node tests/save-reliability.cjs && node tests/save-startup.cjs && node tests/core-loop.cjs && node tests/input-controls.cjs && node --experimental-vm-modules tests/world.mjs && node tests/narration.cjs && node tests/hands-on.cjs && node tests/city-life.cjs"
   }
 }
