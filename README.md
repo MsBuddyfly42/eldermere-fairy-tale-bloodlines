@@ -1,10 +1,18 @@
 # Eldoria — The Fairy-Tale Bloodlines
 
-A playable 3D elven kingdom with connected districts, furnished buildings, the Silverstitch family campaign, recurring adventures, citizen households, a marketplace, gardens, wildlife, weather, and Aurelin’s storytelling treehouse.
+A lighter, direct-control adventure with an optional complete 3D elven kingdom with connected districts, furnished buildings, the Silverstitch family campaign, recurring adventures, citizen households, a marketplace, gardens, wildlife, weather, and Aurelin’s storytelling treehouse.
+
+## Comfortable adventure and full 3D
+
+The default view opens all eleven districts through clear place cards, with a highlighted next clue, the six-clue Silverstitch investigation, crafting, alchemy, shopping, cottage decorations, village mysteries, and an untimed lantern game. It does not load WebGL or the detailed 3D world.
+
+Choose **Explore the full 3D realm** (or add `?view=3d`) for walking, residents, the extended campaign, and hands-on room activities. Both views use the same validated browser save. 3D-specific quest records and inventory are retained when playing the lighter view; its investigation uses the original six-clue case. Switching views does not reset progress.
+
+Comfortable play uses the same Map → Save & backups controls. Uppercase movement now works in 3D, typing and button focus no longer trigger walking, and Stop clears held movement as well as queued routes. Hover picking checks interactables at a bounded rate instead of raycasting every decorative object on every pointer movement.
 
 ## Play locally
 
-Requires a modern browser with WebGL2. From this folder, run:
+Comfortable play requires a modern browser; the optional 3D realm requires WebGL2. From this folder, run:
 
 ```sh
 python3 -m http.server 8000 --directory dist
@@ -98,3 +106,8 @@ The kingdom is surrounded on all four sides by a layered wilderness of mountains
 
 Woodland foliage uses textured individual leaves instead of opaque rounded canopy balls. Meadow textures use consistent world coordinates and moss variation. The old rectangular Whispering Woods brook is removed, restoring meadow beside the cottage walkway. Outdoor pond surfaces sit below the paving.
 
+
+
+## Browser regression checks
+
+`tests/comfortable-browser.cjs` checks the direct adventure in real Chromium: all districts, clue gates and the complete investigation, crafting, shopping, placement, alchemy, the lantern game, saved reload, story chapters, and mobile navigation. Install Playwright separately (`npm install --no-save playwright` and `npx playwright install chromium`), then run `node tests/comfortable-browser.cjs`. Screenshots go to the system temporary directory unless `ELDORIA_SCREENSHOTS_DIR` is set.
