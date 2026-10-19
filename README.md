@@ -2,17 +2,19 @@
 
 A lighter, direct-control adventure with an optional complete 3D elven kingdom with connected districts, furnished buildings, the Silverstitch family campaign, recurring adventures, citizen households, a marketplace, gardens, wildlife, weather, and Aurelin’s storytelling treehouse.
 
-## Comfortable adventure and full 3D
+## City-style play
 
-The default view opens all eleven districts through clear place cards, with a highlighted next clue, the six-clue Silverstitch investigation, crafting, alchemy, shopping, cottage decorations, village mysteries, and an untimed lantern game. It does not load WebGL or the detailed 3D world.
+The default game now follows the scene-first city format of Monopoly City: a front entrance, photographic-style street scenes, clickable building targets, connected room tabs, adjacent-street walk controls, pan/approach/reset controls, activity panels, neighborhood conversations, and a live realm map beside the scene. All eleven districts remain connected; a twelfth map destination leads to Aurelin’s treehouse. Eldoria keeps its mooncoin economy and investigation. Dice and property-rent rules are not added.
 
-Choose **Explore the full 3D realm** (or add `?view=3d`) for walking, residents, the extended campaign, and hands-on room activities. Both views use the same validated browser save. 3D-specific quest records and inventory are retained when playing the lighter view; its investigation uses the original six-clue case. Switching views does not reset progress.
+The treehouse has a photographic-style exterior with a believable staircase and porch, a separate furnished story-room interior, sixteen retained Aurelin tales, page navigation, and optional browser read-aloud. Room and porch location survive reloads. Every outdoor scene uses the new photographic-style environment atlases, while indoors use the retained photographic room images. The city view does not load WebGL. Failed image loads show an explanation while map and activity controls remain usable.
 
-Comfortable play uses the same Map → Save & backups controls. Uppercase movement now works in 3D, typing and button focus no longer trigger walking, and Stop clears held movement as well as queued routes. Hover picking checks interactables at a bounded rate instead of raycasting every decorative object on every pointer movement.
+The clock advances one game minute per eight visible seconds and pauses in menus, on the front entrance, and in hidden tabs. This grants no offline income. City travel advances five game minutes. Saved 3D-specific quests, inventory, pending rewards, and other records remain intact, with the same browser-save, download, and restore controls.
+
+The previous direct adventure remains at `?view=direct`; the previous walkable realm remains at `?view=3d`. The normal interface opens the photographic city. Switching presentations does not reset progress.
 
 ## Play locally
 
-Comfortable play requires a modern browser; the optional 3D realm requires WebGL2. From this folder, run:
+City play requires a modern browser; the retained 3D version requires WebGL2. From this folder, run:
 
 ```sh
 python3 -m http.server 8000 --directory dist
@@ -20,7 +22,7 @@ python3 -m http.server 8000 --directory dist
 
 Open http://localhost:8000. Serve the files over HTTP rather than opening index.html directly. All game assets and Three.js are included; no npm dependencies or external runtime CDN are required.
 
-## Controls
+## Retained 3D controls
 
 - Click the ground to walk; click a building to approach and enter.
 - WASD or keyboard arrows move. E interacts; Esc leaves a room.
@@ -111,3 +113,7 @@ Woodland foliage uses textured individual leaves instead of opaque rounded canop
 ## Browser regression checks
 
 `tests/comfortable-browser.cjs` checks the direct adventure in real Chromium: all districts, clue gates and the complete investigation, crafting, shopping, placement, alchemy, the lantern game, saved reload, story chapters, and mobile navigation. Install Playwright separately (`npm install --no-save playwright` and `npx playwright install chromium`), then run `node tests/comfortable-browser.cjs`. Screenshots go to the system temporary directory unless `ELDORIA_SCREENSHOTS_DIR` is set.
+
+## City browser checks
+
+With Playwright installed, `node tests/city-browser.cjs` verifies all photographic districts, street/room/activity transitions, the six-clue investigation, crafting, shopping, home placement, alchemy, lantern games, save preservation, treehouse exterior/interior, stories, saved-room resume, viewpoint controls, and phone navigation. The direct-presentation suite explicitly uses `?view=direct`. Screenshots go to the system temporary directory or `ELDORIA_SCREENSHOTS_DIR`.
