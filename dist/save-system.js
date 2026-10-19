@@ -32,6 +32,8 @@ window.EldoriaSaves = (() => {
     witnessQuest: x => required({stage: text})(x) && shape({stage: oneOf(['available', 'follow', 'listen', 'letter', 'verify', 'seal', 'complete']), observed: number, rewarded: bool})(x),
     bellCase: x => required({stage: text})(x) && shape({stage: oneOf(['available', 'opening', 'search', 'question', 'follow', 'workshop', 'cellar', 'decision', 'complete']), clues: unique(text), answers: unique(text), rewarded: bool, choice: x => x === null || text(x)})(x),
     silverStory: x => required({step: count})(x) && shape({step: x => count(x) && x <= 11, spoken: unique(text), rewarded: bool})(x),
+    cityAtmosphere: shape({clock: oneOf(['real']), timeZone: text, hemisphere: oneOf(['north','south']), seasonMode: oneOf(['real','manual']), season: oneOf(['spring','summer','autumn','winter']), weatherMode: oneOf(['seasonal','manual']), weather: oneOf(['clear','rain','sleet','snow','thunderstorm','snowstorm','blizzard']), sound: bool, musicVolume: x => number(x) && x <= 1, effectsVolume: x => number(x) && x <= 1}),
+    cityExperience: shape({openingSeen: bool, investigations: map(required({found: unique(text), solved: bool}))}),
     cityLife: shape({v: x => x === 1, xp: count, questSteps: count, shifts: count, games: count,
       jobs: map(count), worked: map(bool), quests: map(required({step: x => count(x) && x <= 3, complete: bool})),
       friends: map(count), social: map(bool), bag: map(count), daily: map(shape({jobs: count, quests: count, games: count, talks: count, discoveries: count})),
