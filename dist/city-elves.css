@@ -39,3 +39,7 @@
 .city-realm .elf-ground-shadow{left:12%;bottom:-1px;width:76%;height:5%;background:radial-gradient(ellipse,#17201bd0 0%,#17201b55 42%,transparent 72%);filter:blur(1px);z-index:0}
 .city-realm .elf-shoe-contact{position:absolute;display:block;transform:translate(-50%,-45%);border-radius:50%;background:radial-gradient(ellipse,#101812e8 0%,#101812a0 40%,transparent 75%);filter:blur(.4px);z-index:1;pointer-events:none}
 .city-realm .elf-name{z-index:3}
+
+/* The dark contact core extends below each sole; body shadows follow the feet, not the sprite's hands or props. */
+.city-realm .elf-shoe-contact{transform:translate(-50%,-25%);background:#111c16bd;filter:blur(1px)}
+.city-realm .elf-ground-shadow{bottom:auto;transform:translate(-50%,-40%);background:radial-gradient(ellipse,#10201999 0%,#10201955 45%,transparent 72%);filter:blur(2px)}
