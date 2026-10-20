@@ -1,0 +1,17 @@
+body{--sky-season:saturate(1)}
+body[data-season=spring]{--sky-season:saturate(1.12)}
+body[data-season=summer]{--sky-season:saturate(1.12) sepia(.05)}
+body[data-season=autumn]{--sky-season:sepia(.15) saturate(1.04)}
+body[data-season=winter]{--sky-season:saturate(.65) brightness(.93)}
+/* Night photographs carry their own moonlight; interiors stay warm and readable. */
+.city-realm #cityScene #citySceneArt{transition:filter 1.2s ease}
+.city-realm #cityScene[data-light-phase=day] #citySceneArt{filter:brightness(1) saturate(1.03) var(--sky-season)!important}
+.city-realm #cityScene[data-light-phase=dawn] #citySceneArt{filter:sepia(.13) saturate(.95) brightness(.95) var(--sky-season)!important}
+.city-realm #cityScene[data-light-phase=dusk] #citySceneArt{filter:sepia(.22) saturate(.95) brightness(.8) var(--sky-season)!important}
+.city-realm #cityScene[data-light-phase=night] #citySceneArt{filter:brightness(.98) saturate(1.03) var(--sky-season)!important}
+.city-realm #cityScene[data-light-phase=night][data-light-interior=true] #citySceneArt{filter:brightness(.77) sepia(.13) saturate(1.05)!important}
+#skyChoices{display:flex;gap:.6rem;flex-wrap:wrap}#skyChoices button[aria-pressed=true]{outline:2px solid #f0d18b;background:#354b48}
+#skyStatus{color:#f4dca8}.sky-event{display:flex;flex-direction:column;text-align:left;gap:.35rem;width:100%;margin:.45rem 0;padding:.85rem}.sky-event span{font-size:.85em;color:#e4c98f}
+.at-calendar-grid .sky-calendar-event{min-width:0;padding:.45rem .1rem;color:#f4d18a;border:1px solid #8d7546;font-size:inherit;background:#283c3c}
+#cityScene[data-holiday=true] .city-art-status{color:#ffe2a0}
+@media(prefers-reduced-motion:reduce){.city-realm #cityScene #citySceneArt{transition:none}}
