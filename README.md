@@ -173,3 +173,13 @@ Two new photographic hidden places—the midnight market and secret moonflower g
 Pure county rules run with `npm test`. `node tests/city-county-browser.cjs` checks all eight camp activities, fire audio start/mute, overnight dawn, midnight doors/closure, newspaper/letters/reactions, all three resident stories/open bakery, four seasonal gatherings, real photo/letter displays, save/reload, calendar and phone layout.
 
 Camp meals can also be eaten or shared with Willow from the campground menu; this consumes a saved serving, records the supper, and grows friendship when shared.
+
+## Willowwood is a neighborhood
+
+The front of your cottage now has a clear side-path entrance to **Willowwood Neighborhood Lane**. Its photographic outdoor scene leads to four distinct furnished private homes: Pip's cottage, Fern's baker's cottage, Master Cobble's home and Keeper Willow's cottage. Your own cottage and legacy room remain separate and keep their saved belongings.
+
+The cottage frontage shows your home and the lane entrance; neighbors' homes are reached through the lane rather than cluttering the front garden with unrelated doors. Each private home's front door returns to that lane. Room trails connect the lane, neighboring homes and your own cottage. The lane receives outdoor weather; the homes shelter their interiors. All five new locations restore from cityView.
+
+Neighbors offer daily conversations, tea and bouquets, with at-home/away context. When a working neighbor is out, you can reply to their welcome note or leave a tea invitation. Visits and shared moments are saved, bouquets consume a flower material, and friendship increases once per neighbor/moment per real date. Pip is available at home; working neighbors are home before 9 a.m. and from 5 p.m.
+
+`tests/city-neighborhood.cjs` runs with npm test. `node tests/city-neighborhood-browser.cjs` verifies the side entrance, all four photographed furnished interiors, route back to your own home, indoor/outdoor weather, daily relationship caps, house/lane reload and phone navigation.
