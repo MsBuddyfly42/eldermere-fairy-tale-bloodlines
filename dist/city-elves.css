@@ -14,8 +14,6 @@
 #cityHotspots{pointer-events:none}#cityHotspots button{pointer-events:auto}
 
 /* Keep the entrance labels above the residents’ faces. */
-#cityScene[data-elves-visible=true] #cityHotspots .door{top:24%!important}
-#cityScene[data-elves-visible=true] #cityHotspots .door:nth-child(even){top:32%!important}
 #cityScene[data-elves-visible=true] #cityHotspots .work{top:24%!important}
 #cityScene[data-elves-visible=true] #cityHotspots .path[data-place]{top:33%!important}
 #cityScene[data-elves-visible=true] #cityHotspots .path:not([data-place]){display:none}
