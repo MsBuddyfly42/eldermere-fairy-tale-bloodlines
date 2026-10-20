@@ -1,0 +1,10 @@
+/* The entire photograph changes; there are no pasted outdoor panels or separate outside screen. */
+.city-realm #cityScene[data-natural-interior=true] #citySceneArt{filter:none!important}
+.city-realm #cityScene[data-natural-interior=true][data-light-phase=dawn] #citySceneArt{filter:sepia(.08) brightness(.95)!important}
+.city-realm #cityScene[data-natural-interior=true][data-light-phase=dusk] #citySceneArt{filter:sepia(.12) brightness(.82)!important}
+.city-realm #cityScene[data-natural-interior=true].at-lightning #citySceneArt{filter:brightness(1.16) saturate(.9)!important}
+.city-realm #cityScene[data-weather-inside=true] #atWeatherCanvas{display:none!important}
+.city-realm #cityScene[data-weather-inside=true]::after{display:none!important}
+#naturalGlassWeather{position:absolute;z-index:1;pointer-events:none;background:transparent!important;border:0;border-radius:0;box-shadow:none;max-width:none;object-fit:fill}#naturalGlassWeather[hidden]{display:none!important}#cityHotspots{z-index:2}
+.natural-room-photo{width:100%;aspect-ratio:3/2;border-radius:8px;background-repeat:no-repeat;margin:12px 0}
+@media(prefers-reduced-motion:reduce){.city-realm #cityScene[data-natural-interior=true].at-lightning #citySceneArt{filter:none!important}}
