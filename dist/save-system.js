@@ -32,6 +32,7 @@ window.EldoriaSaves = (() => {
     witnessQuest: x => required({stage: text})(x) && shape({stage: oneOf(['available', 'follow', 'listen', 'letter', 'verify', 'seal', 'complete']), observed: number, rewarded: bool})(x),
     bellCase: x => required({stage: text})(x) && shape({stage: oneOf(['available', 'opening', 'search', 'question', 'follow', 'workshop', 'cellar', 'decision', 'complete']), clues: unique(text), answers: unique(text), rewarded: bool, choice: x => x === null || text(x)})(x),
     silverStory: x => required({step: count})(x) && shape({step: x => count(x) && x <= 11, spoken: unique(text), rewarded: bool})(x),
+    cityCottage: shape({completed: map(bool), projects: map(bool), bag: map(count), comfort: map(bool), patches: map(required({readyAt: number})), journal: x => text(x) && x.length <= 2000, made: count}),
     citySky: shape({view: oneOf(['auto','day','night']), claimed: map(bool)}),
     cityNeighborhood: shape({visits: map(count), moments: map(bool)}),
     cityCounty: shape({initialized: bool, lastPromise: count, seen: map(count), stories: map(required({step: x => count(x) && x <= 3, complete: bool})), campDays: map(map(bool)), celebrated: map(bool), hidden: map(bool), reactions: map(bool), displays: map(bool), tent: bool,
