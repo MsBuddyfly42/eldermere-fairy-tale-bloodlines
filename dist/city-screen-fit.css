@@ -1,0 +1,32 @@
+/* Complete photographs, including foreground paths and shoe soles. */
+body.city-realm .eldoria-city-scene{min-height:0!important;max-height:none!important;max-width:100%;box-sizing:content-box;margin-inline:auto;scroll-margin-top:10px}
+body.city-realm .city-vignette{background:linear-gradient(180deg,#09212722,transparent 30%)}
+body.city-realm #elfSceneCaption .city-scene-bottom{pointer-events:auto}
+body.city-realm #elfSceneCaption h2{text-shadow:none}
+/* Pair every text surface with its own legible foreground. */
+body.city-realm #modal,body.city-realm #modal :is(p,h2,h3,h4,label,li,small,strong,span,summary,legend){color:#263f35}
+body.city-realm #modal :is(.card,.pill){background:#e9edde;color:#263f35}
+body.city-realm #modal :is(button,button *,a){color:#fff5df;background-color:#234f43}
+body.city-realm #modal :is(input,select,textarea){color:#243e33;background:#fffdf5;border-color:#61765d;color-scheme:light}
+body.city-realm #modal :is(.comfort-secondary,#close){background:#e5eadb;color:#263f35}
+body.city-realm :is(.city-action p,.city-person small,.city-context-bar p,.city-context-bar small,.city-life-stats span,.city-live,.city-eyebrow,.city-section-heading>span,#cityHoldings,.city-full-realm,#cityResult){color:#41563e}
+body.city-realm :is(.city-activity-panel,.city-people-panel,.eldoria-city-sidebar,.city-quest-panel){color:#263f35}
+body.city-realm .city-quest-panel :is(p,small){color:#41563e}
+body.city-realm :is(.city-pill,.city-scene-target,.city-art-status){background-color:#14372f;color:#fff3d4}
+body.city-realm #realmFooter{position:static;background:#12332d;color:#fff3d4}
+body.city-realm #realmFooter span{color:#e6ebda}
+body.city-realm #elfSceneCaption :is(p,.eyebrow){color:#3f5648}
+body.city-realm .city-person-avatar{background:#35583e;color:#fff4d9}
+body.city-realm button:disabled{opacity:1;filter:grayscale(.6);cursor:default}
+body.city-realm .city-entrance-content .city-eyebrow{color:#f0d894}
+body.city-focus header,body.city-focus .city-top-controls,body.city-focus .atmosphere-bar{display:none!important}
+@media(max-width:600px){body.city-realm header{min-height:0;height:auto;padding-block:8px}body.city-realm .city-top-controls{gap:6px;padding-bottom:7px}body.city-realm .city-top-controls>div:first-child{display:none}body.city-realm .stage{padding-top:8px}body.city-realm .city-scene-top{top:6px}body.city-realm .city-art-status{display:none}}
+body.city-realm .atmosphere-bar{flex-wrap:nowrap;overflow-x:auto;gap:6px;padding:6px;margin-bottom:8px;max-width:100%;box-sizing:border-box}
+body.city-realm .atmosphere-bar>*{flex-shrink:0}
+body.city-realm .atmosphere-bar #atSeasonSummary{max-width:180px}
+@media(max-width:600px){body.city-realm .atmosphere-bar button{padding:6px 8px;min-height:38px;font-size:11px}body.city-realm #atSeasonSummary{display:none}}
+@media(max-height:500px){body.city-realm header{min-height:0;height:auto;padding:4px 12px}body.city-realm header .brand h1{font-size:22px}body.city-realm .city-top-controls{display:none}body.city-realm .stage{padding-top:5px}body.city-realm .atmosphere-bar{margin-bottom:5px}}
+body.city-realm #comfortObjective{background:#e3e8d5;color:#263f35}
+body.city-realm #comfortObjective :is(h3,p,small,strong,span){color:#263f35}
+body.city-realm #comfortObjective button{background:#234f43;color:#fff5df}
+body.city-focus #promiseBanner{display:none}
