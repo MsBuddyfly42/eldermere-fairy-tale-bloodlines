@@ -16,5 +16,6 @@ async function setEnabled(on,settings){enabled=!!on;if(!on){clearInterval(timer)
 function volumes(a){if(!ctx)return;music.gain.setTargetAtTime(a.musicVolume,ctx.currentTime,.15);effects.gain.setTargetAtTime(a.effectsVolume,ctx.currentTime,.15)}
 function gesture(){if(!ctx||!enabled)return;weatherTap()}
 document.addEventListener('visibilitychange',()=>{if(!ctx)return;if(document.hidden)ctx.suspend();else if(enabled){nextBeat=ctx.currentTime+.1;ctx.resume()}});
-window.EldoriaSound={setEnabled,weather,volumes,gesture,place,get active(){return enabled&&!!ctx},get state(){return ctx?.state||'off'},get ambience(){return{place:placeName,fire:placeFire,active:placeNodes.length>0}}};
+function cue(kind){if(!ctx||!enabled)return;const notes=kind==='bell'?[74,81,86,93]:kind==='craft'?[69,74,77]:[74];notes.forEach((n,i)=>tone(n,ctx.currentTime+i*.13,kind==='bell'?1.8:.45,'harp',kind==='bell'?.16:.07))}
+window.EldoriaSound={cue,setEnabled,weather,volumes,gesture,place,get active(){return enabled&&!!ctx},get state(){return ctx?.state||'off'},get ambience(){return{place:placeName,fire:placeFire,active:placeNodes.length>0}}};
 })();

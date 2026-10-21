@@ -10,7 +10,7 @@ const streets={
 const floors={
  'neighbor-pip':[[54,94]],'neighbor-fern':[[51,95]],'neighbor-cobble':[[56,93]],'neighbor-willow':[[53,95]],
  'cottage-sitting':[[37,92]],'cottage':[[43,93]],'county-legacy':[[48,94]],
- 'county-camp':[[25,90],[72,86],[84,95]],'county-market':[[39,93],[62,87]],'county-garden':[[43,93],[61,87]],
+ 'county-camp':[[39,90],[53,86],[68,95],[83,90]],'county-market':[[39,93],[62,87]],'county-garden':[[43,93],[61,87]],
  treehouse:[[43,93],[61,87]],'original-shoemaker':[[45,95],[68,91]],
  workshop:[[43,94],[65,88]],shop:[[44,94],[62,88]],tavern:[[43,94],[62,88]],
  study:[[50,94],[66,88]],stable:[[44,94],[62,88]],dormitory:[[44,94],[63,88]],
